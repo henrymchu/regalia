@@ -9,4 +9,5 @@
 
 # Notes
 #     1. https://www.coingecko.com/en/api
+#         a. https://github.com/man-c/pycoingecko
 #     2. https://coinmarketcap.com/api/
