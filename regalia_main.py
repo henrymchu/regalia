@@ -7,7 +7,7 @@
 # Idea 1: User sets up input configuration
 # Idea 2: Configuration is set in a file in the repository and the user is expected to customize it appropriately
 
-from .constants import ALL_EXCHANGES
+from constants import ALL_EXCHANGES
 
 
 def validate_config(user_preference_config):
