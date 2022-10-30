@@ -7,8 +7,5 @@ A tool to search for potential arbitrage opportunities across exchanges
 python -m unittest
 
 ## Authors
-Henry Chu
+Henry Chu, Matthew Lee, Jay Mowli
 
-Matthew Lee
-
-Jay Mowli
