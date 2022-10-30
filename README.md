@@ -3,7 +3,10 @@
 ## Description
 A tool to search for potential arbitrage opportunities across exchanges
 
-## Run Unit Tests
+## Usage
+# Run tool
+python regalia_main.py
+# Run unit tests
 python -m unittest
 
 ## Authors
