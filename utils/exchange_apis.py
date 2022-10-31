@@ -17,7 +17,7 @@ def get_gemini_asset_price(symbol):
 
     :returns: dict with bid/ask/latest
     """
-    url = '{}/v1/publicticker/{}'.format(GEMINI_BASE_URL, 'btcusd')
+    url = '{}/v1/publicticker/{}'.format(GEMINI_BASE_URL, symbol)
     resp = requests.get(url)
     resp_data = resp.json()
     ret = {}
