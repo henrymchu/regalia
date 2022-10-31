@@ -44,3 +44,12 @@ def get_gemini_asset_price(symbol):
 
 
 # -- Coinbase Notes --
+# https://docs.cloud.coinbase.com/exchange/docs#get-historic-rates
+# Requires exchange account API - might be free if one has a Coinbase account
+# https://api.exchange.coinbase.com/products/{product_id}/ticker
+
+
+# -- FTX.US Notes --
+# https://docs.ftx.us/#overview
+# https://ftx.us/api/markets
+# https://ftx.us/api/markets/BTC/USD
