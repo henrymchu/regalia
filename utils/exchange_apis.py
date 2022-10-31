@@ -7,8 +7,33 @@ COINBASE_BASE_URL = 'https://api.exchange.coinbase.com'
 CRYPTO_COM_BASE_URL = 'https://api.crypto.com'
 FTX_US_BASE_URL = 'https://ftx.us'
 GEMINI_BASE_URL = 'https://api.gemini.com'
+KRAKEN_BASE_URL = 'https://api.kraken.com'
 KUCOIN_BASE_URL = 'https://api.kucoin.com'
 OKCOIN_BASE_URL = 'https://www.okcoin.com'
+
+SINGLE_TICKER_IDENTIFIERS_USD = {
+    'BTC': {
+        'name': 'bitcoin',
+        'binance.us': 'BTCUSD',
+        'gemini': 'BTCUSD',
+    },
+    'ETH': {
+        'name': 'ether',
+        'binance.us': 'ETHUSD',
+        'gemini': 'ETHUSD',
+    },
+    'FIL': {
+        'name': 'filecoin',
+        'binance.us': 'FILUSD',
+        'gemini': 'FILUSD',
+    },
+    'REP': {
+        'name': 'augur',
+        'binance.us': 'REPUSD',
+        'coinbase': None,
+        'kraken': 'REPUSD',
+    }
+}
 
 
 # -- Gemini Notes --
@@ -68,8 +93,13 @@ def get_gemini_asset_price(symbol):
 # https://api.crypto.com/v2/public/get-ticker?instrument_name=BTC_USDT
 
 
-# Kucoin Notes --
+# -- Kucoin Notes --
 # https://docs.kucoin.com/#general
 # https://api.kucoin.com/api/v2/symbols
 # https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=BTC-USDT
 # https://api.kucoin.com/api/v1/market/allTickers
+
+
+# -- Kraken Notes --
+# https://docs.kraken.com/rest/
+# https://api.kraken.com/0/public/Ticker?pair=BTCUSD
