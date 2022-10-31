@@ -35,6 +35,12 @@ SINGLE_TICKER_IDENTIFIERS_USD = {
         'binance.us': 'ILVUSD',
         'coinbase': None,
     },
+    'NEAR': {
+        'name': 'near',
+        'binance.us': 'NEARUSD',
+        'coinbase': None,
+        'okcoin': 'NEAR-USD',
+    },
     'REP': {
         'name': 'augur',
         'binance.us': 'REPUSD',
