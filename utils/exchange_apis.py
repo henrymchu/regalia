@@ -30,6 +30,11 @@ SINGLE_TICKER_IDENTIFIERS_USD = {
         'gemini': 'FILUSD',
         'kraken': 'FILUSD',
     },
+    'ILV': {
+        'name': 'illuvium',
+        'binance.us': 'ILVUSD',
+        'coinbase': None,
+    },
     'REP': {
         'name': 'augur',
         'binance.us': 'REPUSD',
