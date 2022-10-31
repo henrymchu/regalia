@@ -53,3 +53,9 @@ def get_gemini_asset_price(symbol):
 # https://docs.ftx.us/#overview
 # https://ftx.us/api/markets
 # https://ftx.us/api/markets/BTC/USD
+
+
+# -- Crypto.com Notes --
+# https://exchange-docs.crypto.com/spot/index.html#introduction
+# https://api.crypto.com/v2/public/get-instruments
+# https://api.crypto.com/v2/public/get-ticker?instrument_name=BTC_USDT
