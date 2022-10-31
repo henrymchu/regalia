@@ -2,13 +2,19 @@
 
 import requests
 
+BINANCE_US_BASE_URL = 'https://api.binance.us'
+COINBASE_BASE_URL = 'https://api.exchange.coinbase.com'
+CRYPTO_COM_BASE_URL = 'https://api.crypto.com'
+FTX_US_BASE_URL = 'https://ftx.us'
+GEMINI_BASE_URL = 'https://api.gemini.com'
+OKCOIN_BASE_URL = 'https://www.okcoin.com'
+
+
 # -- Gemini Notes --
 # https://docs.gemini.com/rest-api/#symbols
 # https://api.gemini.com/v1/symbols/details/btcusd
 # https://api.gemini.com/v1/pubticker/:symbol
 # https://api.gemini.com/v1/pricefeed
-
-GEMINI_BASE_URL = 'https://api.gemini.com'
 
 
 def get_gemini_asset_price(symbol):
