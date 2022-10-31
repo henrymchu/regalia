@@ -2,8 +2,8 @@
 
 import requests
 
+# -- Gemini Notes --
 # https://docs.gemini.com/rest-api/#symbols
-
 # https://api.gemini.com/v1/symbols/details/btcusd
 # https://api.gemini.com/v1/pubticker/:symbol
 # https://api.gemini.com/v1/pricefeed
@@ -28,3 +28,19 @@ def get_gemini_asset_price(symbol):
     }
 
     return ret
+
+
+# -- Okcoin Notes --
+# https://www.okcoin.com/docs/en/
+# https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/book
+# https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/candles
+
+
+# -- Binance.US Notes --
+# https://docs.binance.us/#introduction
+# The base endpoint is: https://api.binance.us
+# https://api.binance.us/api/v3/ticker/price?symbol=BTCUSD
+# https://api.binance.us/api/v3/ticker/price?symbol=ETHUSD
+
+
+# -- Coinbase Notes --
