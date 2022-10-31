@@ -13,9 +13,9 @@ GEMINI_BASE_URL = 'https://api.gemini.com'
 
 def get_gemini_asset_price(symbol):
     """Identifies current asset price on Gemini.
-    :arg symbol: string for trading pair
+    :arg symbol: string for trading pair {btcusd|ethusd}
 
-    :returns: dict with bid/ask/latest
+    :returns: dict with bid/ask/latest for top level symbol key
     """
     url = '{}/v1/publicticker/{}'.format(GEMINI_BASE_URL, symbol)
     resp = requests.get(url)
