@@ -16,23 +16,31 @@ SINGLE_TICKER_IDENTIFIERS_USD = {
         'name': 'bitcoin',
         'binance.us': 'BTCUSD',
         'gemini': 'BTCUSD',
+        'kraken': 'BTCUSD',
     },
     'ETH': {
         'name': 'ether',
         'binance.us': 'ETHUSD',
         'gemini': 'ETHUSD',
+        'kraken': 'ETHUSD',
     },
     'FIL': {
         'name': 'filecoin',
         'binance.us': 'FILUSD',
         'gemini': 'FILUSD',
+        'kraken': 'FILUSD',
     },
     'REP': {
         'name': 'augur',
         'binance.us': 'REPUSD',
         'coinbase': None,
         'kraken': 'REPUSD',
-    }
+    },
+    'SCRT': {
+        'name': 'secret',
+        'kraken': 'SCRTUSD',
+        'okcoin': 'SCRT-USD',
+    },
 }
 
 
@@ -66,6 +74,7 @@ def get_gemini_asset_price(symbol):
 # https://www.okcoin.com/docs/en/
 # https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/book
 # https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/candles
+# https://www.okcoin.com/api/spot/v3/instruments/SCRT-USD/candles
 
 
 # -- Binance.US Notes --
