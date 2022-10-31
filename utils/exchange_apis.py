@@ -7,6 +7,7 @@ COINBASE_BASE_URL = 'https://api.exchange.coinbase.com'
 CRYPTO_COM_BASE_URL = 'https://api.crypto.com'
 FTX_US_BASE_URL = 'https://ftx.us'
 GEMINI_BASE_URL = 'https://api.gemini.com'
+KUCOIN_BASE_URL = 'https://api.kucoin.com'
 OKCOIN_BASE_URL = 'https://www.okcoin.com'
 
 
@@ -65,3 +66,10 @@ def get_gemini_asset_price(symbol):
 # https://exchange-docs.crypto.com/spot/index.html#introduction
 # https://api.crypto.com/v2/public/get-instruments
 # https://api.crypto.com/v2/public/get-ticker?instrument_name=BTC_USDT
+
+
+# Kucoin Notes --
+# https://docs.kucoin.com/#general
+# https://api.kucoin.com/api/v2/symbols
+# https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=BTC-USDT
+# https://api.kucoin.com/api/v1/market/allTickers
