@@ -2,6 +2,8 @@
 
 import requests
 
+from ticker_constants import KNOWN_GEMINI_ASSETS
+
 BINANCE_US_BASE_URL = 'https://api.binance.us'
 COINBASE_BASE_URL = 'https://api.exchange.coinbase.com'
 CRYPTO_COM_BASE_URL = 'https://api.crypto.com'
@@ -87,7 +89,51 @@ def get_gemini_usd_trading_pairs():
 
     :returns: list of tickers
     """
-    pass  # TOOD
+    url = '{}/v1/pricefeed'.format(GEMINI_BASE_URL)
+    resp = requests.get(url)
+    resp_data = resp.json()
+    usd_assets = []
+    gusd_assets = []
+    btc_assets = []
+    eth_assets = []
+    eur_assets = []
+    gbp_assets = []
+    sgd_assets = []
+    for pair_info in resp_data:
+        raw = pair_info.get('pair')
+
+        # Setup string slices for comparison
+        remove_last_three = raw[:-3]
+        last_three = raw[-3:]
+        remove_last_four = raw[:-4]
+        last_four = raw[-4:]
+
+        if last_three == 'USD' and remove_last_three in KNOWN_GEMINI_ASSETS:
+            ticker = remove_last_three
+            usd_assets.append(ticker)
+        elif last_four == 'GUSD' and remove_last_four in KNOWN_GEMINI_ASSETS:
+            ticker = remove_last_four
+            gusd_assets.append(ticker)
+        elif last_three == 'BTC' and remove_last_three in KNOWN_GEMINI_ASSETS:
+            ticker = remove_last_three
+            btc_assets.append(ticker)
+        elif last_three == 'ETH' and remove_last_three in KNOWN_GEMINI_ASSETS:
+            ticker = remove_last_three
+            eth_assets.append(ticker)
+        elif last_three == 'EUR' and remove_last_three in KNOWN_GEMINI_ASSETS:
+            ticker = remove_last_three
+            eur_assets.append(ticker)
+        elif last_three == 'GBP' and remove_last_three in KNOWN_GEMINI_ASSETS:
+            ticker = remove_last_three
+            gbp_assets.append(ticker)
+        elif last_three == 'SGD' and remove_last_three in KNOWN_GEMINI_ASSETS:
+            ticker = remove_last_three
+            sgd_assets.append(ticker)
+        else:
+            print('Unknown trading pair encountered: {}'.format(raw))
+
+    return usd_assets
+
 
 
 # -- Okcoin Notes --
