@@ -27,10 +27,8 @@ OKCOIN_BASE_URL = 'https://www.okcoin.com'
 
 
 # -- Gemini Notes --
-# https://docs.gemini.com/rest-api/#symbols
 # https://api.gemini.com/v1/symbols/details/btcusd
 # https://api.gemini.com/v1/pubticker/:symbol
-# https://api.gemini.com/v1/pricefeed
 
 
 def get_gemini_asset_price(symbol):
@@ -56,6 +54,9 @@ def get_gemini_usd_trading_pairs():
     """Identifies all assets trading on Gemini against US dollar.
 
     :returns: list of tickers
+
+    Notes:
+        https://docs.gemini.com/rest-api/#symbols
     """
     url = '{}/v1/pricefeed'.format(GEMINI_BASE_URL)
     resp = requests.get(url)
@@ -107,17 +108,15 @@ def get_gemini_usd_trading_pairs():
     return usd_assets
 
 
-# -- Okcoin Notes --
-# https://www.okcoin.com/docs/en/
-# https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/book
-# https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/candles
-# https://www.okcoin.com/api/spot/v3/instruments/SCRT-USD/candles
-
-
 def get_okcoin_usd_trading_pairs():
     """Identifies all assets trading on Okcoin against US dollar.
 
     :returns: list of tickers
+
+    Notes:
+        https://www.okcoin.com/docs/en/
+        https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/book
+        https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/candles
     """
     url = '{}/api/spot/v3/instruments/'.format(OKCOIN_BASE_URL)
     resp = requests.get(url)
@@ -135,17 +134,14 @@ def get_okcoin_usd_trading_pairs():
     return usd_assets
 
 
-# -- Binance.US Notes --
-# https://docs.binance.us/#introduction
-# The base endpoint is: https://api.binance.us
-# https://api.binance.us/api/v3/ticker/price?symbol=BTCUSD
-# https://api.binance.us/api/v3/ticker/price?symbol=ETHUSD
-
-
 def get_binance_us_usd_trading_pairs():
     """Identifies all assets trading on Binance.US against US dollar.
 
     :returns: list of tickers
+
+    Notes:
+        https://docs.binance.us/#introduction
+        https://api.binance.us/api/v3/ticker/price?symbol=BTCUSD
     """
     url = '{}/api/v3/exchangeInfo'.format(BINANCE_US_BASE_URL)
     resp = requests.get(url)
@@ -165,16 +161,14 @@ def get_binance_us_usd_trading_pairs():
     return usd_assets
 
 
-# -- Coinbase Notes --
-# https://docs.cloud.coinbase.com/exchange/docs#get-historic-rates
-# Requires exchange account API - might be free if one has a Coinbase account
-# https://api.exchange.coinbase.com/products/{product_id}/ticker
-
-
 def get_coinbase_usd_trading_pairs():
     """Identifies all assets trading on Coinbase against US dollar.
 
     :returns: list of tickers
+
+    Notes:
+        https://docs.cloud.coinbase.com/exchange/docs#get-historic-rates
+        https://api.exchange.coinbase.com/products/{product_id}/ticker
     """
     url = '{}/products'.format(COINBASE_BASE_URL)
     resp = requests.get(url)
@@ -192,16 +186,14 @@ def get_coinbase_usd_trading_pairs():
     return usd_assets
 
 
-# -- FTX.US Notes --
-# https://docs.ftx.us/#overview
-# https://ftx.us/api/markets
-# https://ftx.us/api/markets/BTC/USD
-
-
 def get_ftx_us_usd_trading_pairs():
     """Identifies all assets trading on FTX.US against US dollar.
 
     :returns: list of tickers
+
+    Notes:
+        https://docs.ftx.us/#overview
+        https://ftx.us/api/markets/BTC/USD
     """
     url = '{}/api/markets'.format(FTX_US_BASE_URL)
     resp = requests.get(url)
@@ -237,15 +229,14 @@ def get_ftx_us_usd_trading_pairs():
 # https://api.kucoin.com/api/v1/market/allTickers
 
 
-# -- Kraken Notes --
-# https://docs.kraken.com/rest/
-# https://api.kraken.com/0/public/Ticker?pair=BTCUSD
-
-
 def get_kraken_usd_trading_pairs():
     """Identifies all assets trading on Kraken against US dollar.
 
     :returns: list of tickers
+
+    Notes:
+        https://docs.kraken.com/rest/
+        https://api.kraken.com/0/public/Ticker?pair=BTCUSD
     """
     url = '{}/0/public/AssetPairs'.format(KRAKEN_BASE_URL)
     resp = requests.get(url)
