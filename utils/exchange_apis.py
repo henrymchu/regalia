@@ -160,7 +160,7 @@ def get_binance_us_usd_trading_pairs():
         asset_checker[asset] = True
     for discovered_asset in usd_assets:
         if not asset_checker[discovered_asset]:
-            print('{} was not identified on recent API call. Has it been delisted?')
+            print('{} was not identified on recent API call. Has it been delisted?'.format(discovered_asset))
 
     return usd_assets
 
