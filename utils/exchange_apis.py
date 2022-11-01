@@ -129,6 +129,9 @@ def get_gemini_usd_trading_pairs():
         elif last_three == 'SGD' and remove_last_three in KNOWN_GEMINI_ASSETS:
             ticker = remove_last_three
             sgd_assets.append(ticker)
+        elif last_three in ['BCH', 'DAI', 'LTC', 'FIL']:
+            # Don't worry about trading pairs with bitcoin cash, dai, litecoin, or filecoin
+            pass
         else:
             print('Unknown trading pair encountered: {}'.format(raw))
 
