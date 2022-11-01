@@ -16,50 +16,6 @@ KRAKEN_BASE_URL = 'https://api.kraken.com'
 KUCOIN_BASE_URL = 'https://api.kucoin.com'
 OKCOIN_BASE_URL = 'https://www.okcoin.com'
 
-SINGLE_TICKER_IDENTIFIERS_USD = {
-    'BTC': {
-        'name': 'bitcoin',
-        'binance.us': 'BTCUSD',
-        'gemini': 'BTCUSD',
-        'kraken': 'BTCUSD',
-    },
-    'ETH': {
-        'name': 'ether',
-        'binance.us': 'ETHUSD',
-        'gemini': 'ETHUSD',
-        'kraken': 'ETHUSD',
-    },
-    'FIL': {
-        'name': 'filecoin',
-        'binance.us': 'FILUSD',
-        'coinbase': None,
-        'gemini': 'FILUSD',
-        'kraken': 'FILUSD',
-    },
-    'ILV': {
-        'name': 'illuvium',
-        'binance.us': 'ILVUSD',
-        'coinbase': None,
-    },
-    'NEAR': {
-        'name': 'near',
-        'binance.us': 'NEARUSD',
-        'coinbase': None,
-        'okcoin': 'NEAR-USD',
-    },
-    'REP': {
-        'name': 'augur',
-        'binance.us': 'REPUSD',
-        'coinbase': None,
-        'kraken': 'REPUSD',
-    },
-    'SCRT': {
-        'name': 'secret',
-        'kraken': 'SCRTUSD',
-        'okcoin': 'SCRT-USD',
-    },
-}
-
 
 # -- Gemini Notes --
 # https://docs.gemini.com/rest-api/#symbols
