@@ -1,4 +1,9 @@
+# Assets with USD trading pairs
 
+KNOWN_BINANCE_US_ASSETS = []
+KNOWN_COINBASE_ASSETS = []
+KNOWN_FTX_US_ASSETS = []
+KNONW_KRAKEN_ASSETS = []
 
 # Last update 2022-10-31
 KNOWN_GEMINI_ASSETS = [
@@ -11,3 +16,5 @@ KNOWN_GEMINI_ASSETS = [
     'SAMO', 'SAND', 'SBR', 'SHIB', 'SKL', 'SLP', 'SNX', 'SOL', 'SPELL', 'STORJ', 'SUSHI', 'TOKE', 'TRU', 'UMA',
     'UNI', 'USDC', 'UST', 'WCFG', 'XTZ', 'YFI', 'ZBC', 'ZEC', 'ZRX'
 ]
+
+KNOWN_OKCOIN_ASSETS = []
