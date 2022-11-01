@@ -1,9 +1,12 @@
 # APIs for data from exchanges
 
+# Python imports
 import collections
 
+# Third party imports
 import requests
 
+# Local imports
 from ticker_constants import (
     KNOWN_BINANCE_US_ASSETS,
     KNOWN_COINBASE_ASSETS,
