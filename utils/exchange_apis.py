@@ -6,6 +6,7 @@ from ticker_constants import (
     KNOWN_BINANCE_US_ASSETS,
     KNOWN_FTX_US_ASSETS,
     KNOWN_GEMINI_ASSETS,
+    KNOWN_KRAKEN_ASSETS,
     KNOWN_OKCOIN_ASSETS,
 )
 
@@ -222,4 +223,20 @@ def get_kraken_usd_trading_pairs():
 
     :returns: list of tickers
     """
-    pass  # TOOD
+    url = '{}/0/public/AssetPairs'.format(KRAKEN_BASE_URL)
+    resp = requests.get(url)
+    data = resp.json()
+    if data.get('error'):
+        print('failed to get a successful response from https://api.kraken.com/0/public/AssetPairs')
+
+    usd_assets = []
+    results = data['result']
+    for k, v in results.items():
+        last_three = k[-3:]
+        remove_last_three = k[:-3]
+        if last_three == 'USD' and remove_last_three in KNOWN_KRAKEN_ASSETS:
+            usd_assets.append(remove_last_three)
+        elif last_three == 'USD':
+            print('Unknown Kraken trading pair encountered: {}'.format(remove_last_three))
+
+    return usd_assets
