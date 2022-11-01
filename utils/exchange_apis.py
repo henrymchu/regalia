@@ -186,6 +186,7 @@ def get_ftx_us_usd_trading_pairs():
     data = resp.json()
     if not data.get('success'):
         print('failed to get a successful response from https://ftx.us/api/markets')
+        return []
 
     usd_assets = []
     results = data['result']
@@ -228,6 +229,7 @@ def get_kraken_usd_trading_pairs():
     data = resp.json()
     if data.get('error'):
         print('failed to get a successful response from https://api.kraken.com/0/public/AssetPairs')
+        return []
 
     usd_assets = []
     results = data['result']
