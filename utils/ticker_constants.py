@@ -83,6 +83,7 @@ KNOWN_OKCOIN_ASSETS = [
     'XLM', 'XTZ', 'YFI', 'YFII', 'ZEC', 'ZEN', 'ZIL'
 ]
 
+# Identifiers for single asset inquiry on a given exchange's API
 SINGLE_TICKER_IDENTIFIERS_USD = {
     'BTC': {
         'name': 'bitcoin',
