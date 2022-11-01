@@ -3,6 +3,7 @@
 import requests
 
 from ticker_constants import (
+    KNOWN_BINANCE_US_ASSETS,
     KNOWN_FTX_US_ASSETS,
     KNOWN_GEMINI_ASSETS,
     KNOWN_OKCOIN_ASSETS,
@@ -137,7 +138,21 @@ def get_binance_us_usd_trading_pairs():
 
     :returns: list of tickers
     """
-    pass  # TOOD
+    url = '{}/api/v3/exchangeInfo'.format(BINANCE_US_BASE_URL)
+    resp = requests.get(url)
+    resp_data = resp.json()
+    symbols = resp_data.get('symbols')
+    usd_assets = []
+
+    for symbol in symbols:
+        quote_asset = symbol.get('quoteAsset')
+        base_asset = symbol.get('baseAsset')
+        if quote_asset == 'USD' and base_asset in KNOWN_BINANCE_US_ASSETS:
+            usd_assets.append(base_asset)
+        elif quote_asset == 'USD':
+            print('Unknown Binance.US USD trading pair encountered: {}'.format(base_asset))
+
+    return usd_assets
 
 
 # -- Coinbase Notes --

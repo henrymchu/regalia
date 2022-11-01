@@ -1,6 +1,20 @@
 # Assets with USD trading pairs
 
-KNOWN_BINANCE_US_ASSETS = []
+# Last updated 2022-11-01
+KNOWN_BINANCE_US_ASSETS = [
+    '1INCH', 'AAVE', 'ACH', 'ADA', 'ALGO', 'ALICE', 'ALPINE', 'AMP', 'ANKR', 'ANT', 'APE', 'API3', 'ASTR', 'ATOM',
+    'AUDIO', 'AVAX', 'AXS', 'BAND', 'BAL', 'BAT', 'BCH', 'BICO', 'BNB', 'BNT', 'BOND', 'BTC', 'BTRST', 'BUSD',
+    'CELO', 'CELR', 'CHZ', 'CLV', 'COMP', 'COTI', 'CRV', 'CTSI', 'DAI', 'DAR', 'DASH', 'DGB', 'DOGE', 'DOT',
+    'EGLD', 'ENJ', 'ENS', 'EOS', 'ETC', 'ETH', 'FET', 'FIL', 'FLOW', 'FLUX', 'FORTH', 'FTM', 'GAL', 'GALA', 'GLM',
+    'GRT', 'GTC', 'HBAR', 'HNT', 'ICP', 'ICX', 'ILV', 'IMX', 'IOTA', 'JASMY', 'KDA', 'KNC', 'KSHIB', 'KSM', 'LAZIO',
+    'LDO', 'LINK', 'LOKA', 'LPT', 'LRC', 'LSK', 'LTC', 'LTO', 'MANA', 'MATIC', 'MKR', 'NANO', 'NEAR', 'NEO', 'NMR',
+    'OCEAN', 'OGN', 'OMG', 'ONE', 'ONT', 'OP', 'OXT', 'PAXG', 'POLY', 'POLYX', 'PORTO', 'QTUM', 'RAD', 'RARE',
+    'REEF', 'REN', 'REP', 'REQ', 'RLC', 'RNDR', 'ROSE', 'RVN', 'SAND', 'SANTOS', 'SKL', 'SLP', 'SNX', 'SOL',
+    'SPELL', 'SRM', 'STORJ', 'SUSHI', 'SYS', 'T', 'TFUEL', 'THETA', 'TLM', 'TRX', 'TUSD', 'UNI', 'USDC', 'USDT',
+    'UST', 'VET', 'VITE', 'VOXEL', 'VTHO', 'WAVES', 'WAXP', 'XLM', 'XNO', 'XRP', 'XTZ', 'YFI', 'ZEC', 'ZEN', 'ZIL',
+    'ZRX'
+]
+
 KNOWN_COINBASE_ASSETS = []
 
 # Last updated 2022-10-31
