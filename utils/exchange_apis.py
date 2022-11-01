@@ -27,6 +27,7 @@ SINGLE_TICKER_IDENTIFIERS_USD = {
     'FIL': {
         'name': 'filecoin',
         'binance.us': 'FILUSD',
+        'coinbase': None,
         'gemini': 'FILUSD',
         'kraken': 'FILUSD',
     },
@@ -81,12 +82,27 @@ def get_gemini_asset_price(symbol):
     return ret
 
 
+def get_gemini_usd_trading_pairs():
+    """Identifies all assets trading on Gemini against US dollar.
+
+    :returns: list of tickers
+    """
+    pass  # TOOD
+
+
 # -- Okcoin Notes --
 # https://www.okcoin.com/docs/en/
 # https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/book
 # https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/candles
 # https://www.okcoin.com/api/spot/v3/instruments/SCRT-USD/candles
 
+
+def get_okcoin_usd_trading_pairs():
+    """Identifies all assets trading on Okcoin against US dollar.
+
+    :returns: list of tickers
+    """
+    pass  # TOOD
 
 # -- Binance.US Notes --
 # https://docs.binance.us/#introduction
@@ -95,16 +111,40 @@ def get_gemini_asset_price(symbol):
 # https://api.binance.us/api/v3/ticker/price?symbol=ETHUSD
 
 
+def get_binance_us_usd_trading_pairs():
+    """Identifies all assets trading on Binance.US against US dollar.
+
+    :returns: list of tickers
+    """
+    pass  # TOOD
+
+
 # -- Coinbase Notes --
 # https://docs.cloud.coinbase.com/exchange/docs#get-historic-rates
 # Requires exchange account API - might be free if one has a Coinbase account
 # https://api.exchange.coinbase.com/products/{product_id}/ticker
 
 
+def get_coinbase_usd_trading_pairs():
+    """Identifies all assets trading on Coinbase against US dollar.
+
+    :returns: list of tickers
+    """
+    pass  # TOOD
+
+
 # -- FTX.US Notes --
 # https://docs.ftx.us/#overview
 # https://ftx.us/api/markets
 # https://ftx.us/api/markets/BTC/USD
+
+
+def get_ftx_us_usd_trading_pairs():
+    """Identifies all assets trading on FTX.US against US dollar.
+
+    :returns: list of tickers
+    """
+    pass  # TOOD
 
 
 # -- Crypto.com Notes --
@@ -123,3 +163,11 @@ def get_gemini_asset_price(symbol):
 # -- Kraken Notes --
 # https://docs.kraken.com/rest/
 # https://api.kraken.com/0/public/Ticker?pair=BTCUSD
+
+
+def get_kraken_usd_trading_pairs():
+    """Identifies all assets trading on Kraken against US dollar.
+
+    :returns: list of tickers
+    """
+    pass  # TOOD
