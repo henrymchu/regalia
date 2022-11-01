@@ -6,6 +6,7 @@ import requests
 
 from ticker_constants import (
     KNOWN_BINANCE_US_ASSETS,
+    KNOWN_COINBASE_ASSETS,
     KNOWN_FTX_US_ASSETS,
     KNOWN_GEMINI_ASSETS,
     KNOWN_KRAKEN_ASSETS,
@@ -172,7 +173,20 @@ def get_coinbase_usd_trading_pairs():
 
     :returns: list of tickers
     """
-    pass  # TOOD
+    url = '{}/products'.format(COINBASE_BASE_URL)
+    resp = requests.get(url)
+    data = resp.json()
+    usd_assets = []
+    for result in data:
+        quote_currency = result.get('quote_currency')
+        base_currency = result.get('base_currency')
+        if quote_currency == 'USD' and base_currency in KNOWN_COINBASE_ASSETS:
+            usd_assets.append(base_currency)
+        elif quote_currency == 'USD':
+            print('Unknown Coinbase trading pair encountered: {}'.format(base_currency))
+
+    _ = check_for_delisting(KNOWN_COINBASE_ASSETS, usd_assets, 'Coinbase')
+    return usd_assets
 
 
 # -- FTX.US Notes --
@@ -199,7 +213,7 @@ def get_ftx_us_usd_trading_pairs():
         raw_name = result.get('name')
         pair = raw_name.split('/')
         if pair[1] == 'USD' and pair[0] not in KNOWN_FTX_US_ASSETS:
-            print('Unknown FTX trading pair encountered: {}'.format(raw_name))
+            print('Unknown FTX.US trading pair encountered: {}'.format(raw_name))
         elif pair[1] == 'USD':
             usd_assets.append(pair[0])
 
