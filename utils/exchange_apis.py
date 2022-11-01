@@ -5,6 +5,7 @@ import requests
 from ticker_constants import (
     KNOWN_FTX_US_ASSETS,
     KNOWN_GEMINI_ASSETS,
+    KNOWN_OKCOIN_ASSETS,
 )
 
 BINANCE_US_BASE_URL = 'https://api.binance.us'
@@ -97,7 +98,6 @@ def get_gemini_usd_trading_pairs():
     return usd_assets
 
 
-
 # -- Okcoin Notes --
 # https://www.okcoin.com/docs/en/
 # https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/book
@@ -110,7 +110,20 @@ def get_okcoin_usd_trading_pairs():
 
     :returns: list of tickers
     """
-    pass  # TOOD
+    url = '{}/api/spot/v3/instruments/'.format(OKCOIN_BASE_URL)
+    resp = requests.get(url)
+    resp_data = resp.json()
+    usd_assets = []
+    for result in resp_data:
+        base_currency = result.get('base_currency')
+        quote_currency = result.get('quote_currency')
+        if quote_currency == 'USD' and base_currency in KNOWN_OKCOIN_ASSETS:
+            usd_assets.append(base_currency)
+        elif quote_currency == 'USD':
+            print('Unknown Okcoin USD trading pair encountered: {}'.format(base_currency))
+
+    return usd_assets
+
 
 # -- Binance.US Notes --
 # https://docs.binance.us/#introduction

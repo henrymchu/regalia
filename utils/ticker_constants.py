@@ -23,7 +23,15 @@ KNOWN_GEMINI_ASSETS = [
     'UNI', 'USDC', 'UST', 'WCFG', 'XTZ', 'YFI', 'ZBC', 'ZEC', 'ZRX'
 ]
 
-KNOWN_OKCOIN_ASSETS = []
+# Last updated 2022-10-31
+KNOWN_OKCOIN_ASSETS = [
+    'AAVE', 'ADA', 'ALGO', 'ANC', 'APE', 'API3', 'AR', 'ASTR', 'ATLAS', 'ATOM', 'AVAX', 'AXS', 'BRWL', 'BTC', 'CELO',
+    'CHZ', 'COMP', 'CRO', 'CUSD', 'DAI', 'DIKO', 'DOGE', 'DOT', 'EGLD', 'ENJ', 'ENS', 'EOS', 'ETH', 'FLOW', 'FTM',
+    'GALA', 'GRT', 'HASH', 'HBAR', 'HKC', 'ICP', 'ICX', 'IOTX', 'KDA', 'LINK', 'LRC', 'LTC', 'LUNA', 'LUNC', 'LUNR',
+    'MAGIC', 'MANA', 'MATIC', 'MIA', 'MIM', 'MKR', 'NEAR', 'NYC', 'ONE', 'OP', 'POKT', 'UNI', 'USDT', 'SCRT', 'SHIB',
+    'SLP', 'SNX', 'SOL', 'SPELL', 'STMX', 'STX', 'SUSHI', 'TRX', 'UMA', 'USDC', 'USDK', 'USTC', 'WAXP', 'WBTC', 'XCN',
+    'XLM', 'XTZ', 'YFI', 'YFII', 'ZEC', 'ZEN', 'ZIL'
+]
 
 SINGLE_TICKER_IDENTIFIERS_USD = {
     'BTC': {
