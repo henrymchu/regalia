@@ -1,5 +1,7 @@
 # APIs for data from exchanges
 
+import collections
+
 import requests
 
 from ticker_constants import (
@@ -152,6 +154,13 @@ def get_binance_us_usd_trading_pairs():
             usd_assets.append(base_asset)
         elif quote_asset == 'USD':
             print('Unknown Binance.US USD trading pair encountered: {}'.format(base_asset))
+
+    asset_checker = collections.defaultdict(bool)
+    for asset in KNOWN_BINANCE_US_ASSETS:
+        asset_checker[asset] = True
+    for discovered_asset in usd_assets:
+        if not asset_checker[discovered_asset]:
+            print('{} was not identified on recent API call. Has it been delisted?')
 
     return usd_assets
 
