@@ -99,6 +99,7 @@ def get_gemini_usd_trading_pairs():
         else:
             print('Unknown Gemini trading pair encountered: {}'.format(raw))
 
+    _ = check_for_delisting(KNOWN_GEMINI_ASSETS, usd_assets, 'Gemini')
     return usd_assets
 
 
@@ -126,6 +127,7 @@ def get_okcoin_usd_trading_pairs():
         elif quote_currency == 'USD':
             print('Unknown Okcoin USD trading pair encountered: {}'.format(base_currency))
 
+    _ = check_for_delisting(KNOWN_OKCOIN_ASSETS, usd_assets, 'Okcoin')
     return usd_assets
 
 
@@ -155,13 +157,7 @@ def get_binance_us_usd_trading_pairs():
         elif quote_asset == 'USD':
             print('Unknown Binance.US USD trading pair encountered: {}'.format(base_asset))
 
-    asset_checker = collections.defaultdict(bool)
-    for asset in KNOWN_BINANCE_US_ASSETS:
-        asset_checker[asset] = True
-    for discovered_asset in usd_assets:
-        if not asset_checker[discovered_asset]:
-            print('{} was not identified on recent API call. Has it been delisted?'.format(discovered_asset))
-
+    _ = check_for_delisting(KNOWN_BINANCE_US_ASSETS, usd_assets, 'Binance.US')
     return usd_assets
 
 
@@ -207,6 +203,7 @@ def get_ftx_us_usd_trading_pairs():
         elif pair[1] == 'USD':
             usd_assets.append(pair[0])
 
+    _ = check_for_delisting(KNOWN_FTX_US_ASSETS, usd_assets, 'FTX.US')
     return usd_assets
 
 
@@ -250,4 +247,27 @@ def get_kraken_usd_trading_pairs():
         elif last_three == 'USD':
             print('Unknown Kraken trading pair encountered: {}'.format(remove_last_three))
 
+    _ = check_for_delisting(KNOWN_KRAKEN_ASSETS, usd_assets, 'Kraken')
     return usd_assets
+
+
+def check_for_delisting(known_assets, discovered_assets, exchange_name):
+    """Checks if a recent list of discovered assets contains something not in the known assets.
+    :arg known_assets: list of tickers
+    :arg discovered_assets: list of tickers
+    :arg exchange_name: str
+
+    :return: list of potentially delisted assets
+    """
+    asset_checker = collections.defaultdict(bool)
+    missing_from_known_assets = []
+    for known_asset in known_assets:
+        asset_checker[known_asset] = True
+    for discovered_asset in discovered_assets:
+        if not asset_checker[discovered_asset]:
+            print('{} was not identified on recent API call. Has {} delisted it?'.format(
+                discovered_asset, exchange_name)
+            )
+            missing_from_known_assets.append(discovered_asset)
+
+    return missing_from_known_assets
