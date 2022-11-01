@@ -2,7 +2,10 @@
 
 import requests
 
-from ticker_constants import KNOWN_GEMINI_ASSETS
+from ticker_constants import (
+    KNOWN_FTX_US_ASSETS,
+    KNOWN_GEMINI_ASSETS,
+)
 
 BINANCE_US_BASE_URL = 'https://api.binance.us'
 COINBASE_BASE_URL = 'https://api.exchange.coinbase.com'
@@ -12,50 +15,6 @@ GEMINI_BASE_URL = 'https://api.gemini.com'
 KRAKEN_BASE_URL = 'https://api.kraken.com'
 KUCOIN_BASE_URL = 'https://api.kucoin.com'
 OKCOIN_BASE_URL = 'https://www.okcoin.com'
-
-SINGLE_TICKER_IDENTIFIERS_USD = {
-    'BTC': {
-        'name': 'bitcoin',
-        'binance.us': 'BTCUSD',
-        'gemini': 'BTCUSD',
-        'kraken': 'BTCUSD',
-    },
-    'ETH': {
-        'name': 'ether',
-        'binance.us': 'ETHUSD',
-        'gemini': 'ETHUSD',
-        'kraken': 'ETHUSD',
-    },
-    'FIL': {
-        'name': 'filecoin',
-        'binance.us': 'FILUSD',
-        'coinbase': None,
-        'gemini': 'FILUSD',
-        'kraken': 'FILUSD',
-    },
-    'ILV': {
-        'name': 'illuvium',
-        'binance.us': 'ILVUSD',
-        'coinbase': None,
-    },
-    'NEAR': {
-        'name': 'near',
-        'binance.us': 'NEARUSD',
-        'coinbase': None,
-        'okcoin': 'NEAR-USD',
-    },
-    'REP': {
-        'name': 'augur',
-        'binance.us': 'REPUSD',
-        'coinbase': None,
-        'kraken': 'REPUSD',
-    },
-    'SCRT': {
-        'name': 'secret',
-        'kraken': 'SCRTUSD',
-        'okcoin': 'SCRT-USD',
-    },
-}
 
 
 # -- Gemini Notes --
@@ -133,7 +92,7 @@ def get_gemini_usd_trading_pairs():
             # Don't worry about trading pairs with bitcoin cash, dai, litecoin, or filecoin
             pass
         else:
-            print('Unknown trading pair encountered: {}'.format(raw))
+            print('Unknown Gemini trading pair encountered: {}'.format(raw))
 
     return usd_assets
 
@@ -193,7 +152,23 @@ def get_ftx_us_usd_trading_pairs():
 
     :returns: list of tickers
     """
-    pass  # TOOD
+    url = '{}/api/markets'.format(FTX_US_BASE_URL)
+    resp = requests.get(url)
+    data = resp.json()
+    if not data.get('success'):
+        print('failed to get a successful response from https://ftx.us/api/markets')
+
+    usd_assets = []
+    results = data['result']
+    for result in results:
+        raw_name = result.get('name')
+        pair = raw_name.split('/')
+        if pair[1] == 'USD' and pair[0] not in KNOWN_FTX_US_ASSETS:
+            print('Unknown FTX trading pair encountered: {}'.format(raw_name))
+        elif pair[1] == 'USD':
+            usd_assets.append(pair[0])
+
+    return usd_assets
 
 
 # -- Crypto.com Notes --
