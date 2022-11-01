@@ -21,9 +21,27 @@ KNOWN_COINBASE_ASSETS = []
 KNOWN_FTX_US_ASSETS = [
     'AAVE', 'ALGO', 'AUD', 'AVAX', 'BAT', 'BCH', 'BRZ', 'BTC', 'CAD', 'CUSDT', 'DAI', 'DOGE', 'ETH', 'ETHW', 'EUR',
     'GBP', 'GRT', 'KSHIB', 'LINK', 'LTC', 'MATIC', 'MKR', 'NEAR', 'PAXG', 'SHIB', 'SOL', 'SUSHI', 'TRX', 'UNI',
-    'USDT', 'WBTC', 'YFI']
+    'USDT', 'WBTC', 'YFI'
+]
 
-KNONW_KRAKEN_ASSETS = []
+# Last updated 2022-11-01
+KNOWN_KRAKEN_ASSETS = [
+    '1INCH', 'AAVE', 'ACA', 'ACH', 'ADA', 'ADX', 'AGLD', 'AIR', 'AKT', 'ALCX', 'ALGO', 'ALICE', 'ALPHA', 'ANKR',
+    'ANT', 'APE', 'API3', 'APT', 'ARPA', 'ASTR', 'ATLAS', 'ATOM', 'AUDIO', 'AUD', 'AVAX', 'AXS', 'BADGER', 'BAL',
+    'BAND', 'BAT', 'BCH', 'BICO', 'BIT', 'BLZ', 'BNC', 'BNT', 'BOBA', 'BOND', 'BSX', 'BTC', 'BTT', 'C98', 'CELR',
+    'CFG', 'CHR', 'CHZ', 'COMP', 'COTI', 'CQT', 'CRV', 'CSM', 'CTSI', 'CVC', 'CVX', 'DAI', 'DASH', 'DENT', 'DOT',
+    'DYDX', 'EGLD', 'ENJ', 'ENS', 'EOS', 'ETHW', 'EWT', 'FARM', 'FET', 'FIDA', 'FIL', 'FIS', 'FLOW', 'FORTH', 'FTM',
+    'FXS', 'GALA', 'GAL', 'GARI', 'GHST', 'GLMR', 'GMT', 'GNO', 'GRT', 'GST', 'GTC', 'ICP', 'ICX', 'IDEX', 'IMX',
+    'INJ', 'INTR', 'JASMY', 'JUNO', 'KAR', 'KAVA', 'KEEP', 'KEY', 'KILT', 'KINT', 'KIN', 'KNC', 'KP3R', 'KSM',
+    'LCX', 'LDO', 'LINK', 'LPT', 'LRC', 'LSK', 'LUNA2', 'LUNA', 'MANA', 'MASK', 'MATIC', 'MC', 'MINA', 'MIR', 'MKR',
+    'MNGO', 'MOVR', 'MSOL', 'MULTI', 'MV', 'MXC', 'NANO', 'NEAR', 'NMR', 'NODL', 'NYM', 'OCEAN', 'OGN', 'OMG',
+    'ORCA', 'OXT', 'OXY', 'PARA', 'PAXG', 'PERP', 'PHA', 'PLA', 'POLIS', 'POLS', 'POND', 'POWR', 'PSTAKE', 'QNT',
+    'QTUM', 'RAD', 'RARE', 'RARI', 'RAY', 'RBC', 'REN', 'REPV2', 'REQ', 'RLC', 'RNDR', 'ROOK', 'RPL', 'RUNE', 'SAMO',
+    'SAND', 'SBR', 'SCRT', 'SC', 'SDN', 'SGB', 'SHIB', 'SNX', 'SOL', 'SPELL', 'SRM', 'STEP', 'STG', 'STORJ', 'STX',
+    'SUPER', 'SUSHI', 'SYN', 'TBTC', 'TEER', 'TLM', 'TOKE', 'TRIBE', 'TRU', 'TRX', 'T', 'TVK', 'UMA', 'UNFI', 'UNI',
+    'USDC', 'USDTZ', 'UST', 'WAVES', 'WBTC', 'WOO', 'XCN', 'XDG', 'XETCZ', 'XETHZ', 'XLTCZ', 'XMLNZ', 'XREPZ', 'XRT',
+    'XTZ', 'XXBTZ', 'XXLMZ', 'XXMRZ', 'XXRPZ', 'XZECZ', 'YFI', 'YGG', 'ZEURZ', 'ZGBPZ', 'ZRX'
+]
 
 # Last updated 2022-10-31
 KNOWN_GEMINI_ASSETS = [
