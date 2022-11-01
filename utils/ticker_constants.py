@@ -87,8 +87,11 @@ SINGLE_TICKER_IDENTIFIERS_USD = {
     'BTC': {
         'name': 'bitcoin',
         'binance.us': 'BTCUSD',
+        'coinbase': 'BTC-USD',
+        'ftx.us': 'BTC/USD',
         'gemini': 'BTCUSD',
         'kraken': 'BTCUSD',
+        'okcoin': 'BTC-USD',
     },
     'ETH': {
         'name': 'ether',
