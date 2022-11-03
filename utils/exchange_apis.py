@@ -114,6 +114,7 @@ def get_okcoin_usd_trading_pairs():
     :returns: list of tickers
 
     Notes:
+        Public API rate limit: 20 Requests per 2 seconds
         https://www.okcoin.com/docs/en/
         https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/book
         https://www.okcoin.com/api/spot/v3/instruments/BTC-USD/candles
@@ -194,6 +195,7 @@ def get_ftx_us_usd_trading_pairs():
     Notes:
         https://docs.ftx.us/#overview
         https://ftx.us/api/markets/BTC/USD
+        https://help.ftx.com/hc/en-us/articles/360052595091-2020-11-20-Ratelimit-Updates
     """
     url = '{}/api/markets'.format(FTX_US_BASE_URL)
     resp = requests.get(url)
