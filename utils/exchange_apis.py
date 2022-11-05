@@ -2,6 +2,17 @@
 
 # Python imports
 import collections
+# TODO Figure out how these imports work to not have to use sys.path.append
+import sys
+sys.path.append("..")  # Adds higher directory to python modules path.
+from constants import (
+    BINANCE_US_ID,
+    COINBASE_ID,
+    FTX_US_ID,
+    GEMINI_ID,
+    KRAKEN_ID,
+    OKCOIN_ID,
+)
 
 # Third party imports
 import requests
@@ -16,6 +27,7 @@ from ticker_constants import (
     KNOWN_OKCOIN_ASSETS,
 )
 
+
 BINANCE_US_BASE_URL = 'https://api.binance.us'
 COINBASE_BASE_URL = 'https://api.exchange.coinbase.com'
 CRYPTO_COM_BASE_URL = 'https://api.crypto.com'
@@ -24,6 +36,59 @@ GEMINI_BASE_URL = 'https://api.gemini.com'
 KRAKEN_BASE_URL = 'https://api.kraken.com'
 KUCOIN_BASE_URL = 'https://api.kucoin.com'
 OKCOIN_BASE_URL = 'https://www.okcoin.com'
+
+
+def convert_ticker_to_symbol(ticker, exchange_id):
+    """Converts a ticker to a symbol for url insertion.
+    :arg: ticker: str
+    :arg: exchange_id: str
+
+    :returns: str
+    """
+    url_symbol = ''
+    if exchange_id in [BINANCE_US_ID, KRAKEN_ID]:
+        url_symbol = '{}USD'.format(ticker.upper())
+    elif exchange_id in [COINBASE_ID, OKCOIN_ID]:
+        url_symbol = '{}-USD'.format(ticker.upper())
+    elif exchange_id == FTX_US_ID:
+        url_symbol = '{}/USD'.format(ticker.upper())
+    elif exchange_id == GEMINI_ID:
+        url_symbol = '{}usd'.format(ticker.lower())
+    else:
+        print('Invalid exchange identifier')
+
+    return url_symbol
+
+
+def get_asset_price_at_exchange(ticker, exchange_id):
+    """Finds the current price of an asset at an exchange.
+    :arg: ticker: str
+    :arg: exchange_id: str
+
+    :returns: price: float
+    """
+    symbol = convert_ticker_to_symbol(ticker, exchange_id)
+    if exchange_id == BINANCE_US_ID:
+        price_info = get_binance_us_asset_price(symbol)
+        return price_info.get('price')
+    elif exchange_id == COINBASE_ID:
+        price_info = get_coinbase_asset_price(symbol)
+        return price_info.get('price')
+    elif exchange_id == FTX_US_ID:
+        price_info = get_ftx_us_asset_price(symbol)
+        return price_info.get('price')
+    elif exchange_id == GEMINI_ID:
+        price_info = get_gemini_asset_price(symbol)
+        return price_info.get('last')
+    elif exchange_id == KRAKEN_ID:
+        price_info = get_kraken_asset_price(symbol)
+        return price_info.get('price')
+    elif exchange_id == OKCOIN_ID:
+        price_info = get_okcoin_asset_price(symbol)
+        return price_info.get('close')
+    else:
+        print('Invalid exchange identifier')
+        return None
 
 
 # -- Gemini Notes --
@@ -35,18 +100,16 @@ def get_gemini_asset_price(symbol):
     """Identifies current asset price on Gemini.
     :arg symbol: string for trading pair {btcusd|ethusd}
 
-    :returns: dict with bid/ask/latest for top level symbol key
+    :returns: dict with bid/ask/last
     """
-    url = '{}/v1/publicticker/{}'.format(GEMINI_BASE_URL, symbol)
+    url = '{}/v1/pubticker/{}'.format(GEMINI_BASE_URL, symbol)
     resp = requests.get(url)
     resp_data = resp.json()
-    ret = {}
-    ret[symbol] = {
-        'bid': resp_data.get('bid'),
-        'ask': resp_data.get('ask'),
-        'latest': resp_data.get('latest')
+    ret = {
+        'bid': float(resp_data.get('bid')),
+        'ask': float(resp_data.get('ask')),
+        'last': float(resp_data.get('last')),
     }
-
     return ret
 
 
@@ -108,6 +171,31 @@ def get_gemini_usd_trading_pairs():
     return usd_assets
 
 
+def get_okcoin_asset_price(symbol):
+    """Identifies current asset price on Okcoin.
+    :arg symbol: string for trading pair {BTC-USD|ETH-USD}
+
+    :returns: dict with open/high/low/close/volume
+    """
+    url = '{}/api/spot/v3/instruments/{}/candles'.format(OKCOIN_BASE_URL, symbol)
+    resp = requests.get(url)
+    resp_data = resp.json()
+    if type(resp_data) == dict:
+        print('okcoin {} dict resp: {}'.format(symbol, resp_data))
+        return {}
+
+    latest_candlesticks = resp_data[0]
+    ret = {
+        'open': float(latest_candlesticks[1]),
+        'high': float(latest_candlesticks[2]),
+        'low': float(latest_candlesticks[3]),
+        'close': float(latest_candlesticks[4]),
+        'volume': float(latest_candlesticks[5]),
+    }
+
+    return ret
+
+
 def get_okcoin_usd_trading_pairs():
     """Identifies all assets trading on Okcoin against US dollar.
 
@@ -133,6 +221,22 @@ def get_okcoin_usd_trading_pairs():
 
     _ = check_for_delisting(KNOWN_OKCOIN_ASSETS, usd_assets, 'Okcoin')
     return usd_assets
+
+
+def get_binance_us_asset_price(symbol):
+    """Identifies current asset price on Binance.US.
+    :arg symbol: string for trading pair {BTCUSD|ETHUSD}
+
+    :returns: dict with symbol/price
+    """
+    url = '{}/api/v3/ticker/price?symbol={}'.format(BINANCE_US_BASE_URL, symbol)
+    resp = requests.get(url)
+    resp_data = resp.json()
+    ret = {
+        'symbol': resp_data.get('symbol'),
+        'price': float(resp_data.get('price')),
+    }
+    return ret
 
 
 def get_binance_us_usd_trading_pairs():
@@ -162,6 +266,24 @@ def get_binance_us_usd_trading_pairs():
     return usd_assets
 
 
+def get_coinbase_asset_price(symbol):
+    """Identifies current asset price on Coinbase.
+    :arg symbol: string for trading pair {BTC-USD|ETH-USD}
+
+    :returns: dict with ask/bid/volume/price
+    """
+    url = '{}/products/{}/ticker'.format(COINBASE_BASE_URL, symbol)
+    resp = requests.get(url)
+    resp_data = resp.json()
+    ret = {
+        'ask': float(resp_data.get('ask')),
+        'bid': float(resp_data.get('bid')),
+        'volume': float(resp_data.get('volume')),
+        'price': float(resp_data.get('price')),
+    }
+    return ret
+
+
 def get_coinbase_usd_trading_pairs():
     """Identifies all assets trading on Coinbase against US dollar.
 
@@ -185,6 +307,28 @@ def get_coinbase_usd_trading_pairs():
 
     _ = check_for_delisting(KNOWN_COINBASE_ASSETS, usd_assets, 'Coinbase')
     return usd_assets
+
+
+def get_ftx_us_asset_price(symbol):
+    """Identifies current asset price on FTX.us.
+    :arg symbol: string for trading pair {BTC/USD|ETH/USD}
+
+    :returns: dict with bid/ask/price/last
+    """
+    url = '{}/api/markets/{}'.format(FTX_US_BASE_URL, symbol)
+    resp = requests.get(url)
+    data = resp.json()
+    if not data.get('success'):
+        print('failed to get a successful response from {}/api/markets/{}'.format(FTX_US_BASE_URL, symbol))
+        return {}
+
+    result = data.get('result', {})
+    ret = {
+        'bid': float(result.get('bid')),
+        'ask': float(result.get('ask')),
+        'price': float(result.get('price')),
+    }
+    return ret
 
 
 def get_ftx_us_usd_trading_pairs():
@@ -229,6 +373,32 @@ def get_ftx_us_usd_trading_pairs():
 # https://api.kucoin.com/api/v2/symbols
 # https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=BTC-USDT
 # https://api.kucoin.com/api/v1/market/allTickers
+
+
+def get_kraken_asset_price(symbol):
+    """Identifies current asset price on Kraken.
+    :arg symbol: string for trading pair {BTCUSD|ETHUSD}
+
+    :returns: dict with price/low/high/ask/bid
+    """
+    url = '{}/0/public/Ticker?pair={}'.format(KRAKEN_BASE_URL, symbol)
+    resp = requests.get(url)
+    data = resp.json()
+    if data.get('error'):
+        print('failed to get a successful response from {}/0/public/Ticker?pair={}'.format(KRAKEN_BASE_URL, symbol))
+        return {}
+
+    result = data.get('result', {})
+    r_key = list(result.keys())[0]
+    price_data = result.get(r_key)
+    ret = {
+        'price': float(price_data.get('c')[0]),
+        'low': float(price_data.get('l')[0]),
+        'high': float(price_data.get('h')[0]),
+        'ask': float(price_data.get('a')[0]),
+        'bid': float(price_data.get('b')[0]),
+    }
+    return ret
 
 
 def get_kraken_usd_trading_pairs():
