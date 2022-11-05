@@ -8,7 +8,7 @@ KNOWN_BINANCE_US_ASSETS = [
     'EGLD', 'ENJ', 'ENS', 'EOS', 'ETC', 'ETH', 'FET', 'FIL', 'FLOW', 'FLUX', 'FORTH', 'FTM', 'GAL', 'GALA', 'GLM',
     'GRT', 'GTC', 'HBAR', 'HNT', 'ICP', 'ICX', 'ILV', 'IMX', 'IOTA', 'JASMY', 'KDA', 'KNC', 'KSHIB', 'KSM', 'LAZIO',
     'LDO', 'LINK', 'LOKA', 'LPT', 'LRC', 'LSK', 'LTC', 'LTO', 'MANA', 'MATIC', 'MKR', 'NANO', 'NEAR', 'NEO', 'NMR',
-    'OCEAN', 'OGN', 'OMG', 'ONE', 'ONT', 'OP', 'OXT', 'PAXG', 'POLY', 'POLYX', 'PORTO', 'QTUM', 'RAD', 'RARE',
+    'OCEAN', 'OGN', 'OMG', 'ONE', 'ONT', 'OP', 'OXT', 'PAXG', 'POLY', 'POLYX', 'PORTO', 'QNT', 'QTUM', 'RAD', 'RARE',
     'REEF', 'REN', 'REP', 'REQ', 'RLC', 'RNDR', 'ROSE', 'RVN', 'SAND', 'SANTOS', 'SKL', 'SLP', 'SNX', 'SOL',
     'SPELL', 'SRM', 'STORJ', 'SUSHI', 'SYS', 'T', 'TFUEL', 'THETA', 'TLM', 'TRX', 'TUSD', 'UNI', 'USDC', 'USDT',
     'UST', 'VET', 'VITE', 'VOXEL', 'VTHO', 'WAVES', 'WAXP', 'XLM', 'XNO', 'XRP', 'XTZ', 'YFI', 'ZEC', 'ZEN', 'ZIL',
