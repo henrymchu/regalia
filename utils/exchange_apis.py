@@ -105,10 +105,20 @@ def get_gemini_asset_price(symbol):
     url = '{}/v1/pubticker/{}'.format(GEMINI_BASE_URL, symbol)
     resp = requests.get(url)
     resp_data = resp.json()
+    try:
+        bid = float(resp_data.get('bid'))
+        ask = float(resp_data.get('ask'))
+        last = float(resp_data.get('last'))
+    except TypeError:
+        print('!!!!! Error in get_gemini_asset_price for {}'.format(symbol))
+        bid = None
+        ask = None
+        last = None
+
     ret = {
-        'bid': float(resp_data.get('bid')),
-        'ask': float(resp_data.get('ask')),
-        'last': float(resp_data.get('last')),
+        'bid': bid,
+        'ask': ask,
+        'last': last,
     }
     return ret
 
@@ -185,12 +195,22 @@ def get_okcoin_asset_price(symbol):
         return {}
 
     latest_candlesticks = resp_data[0]
+    try:
+        open_ = float(latest_candlesticks[1])
+        high = float(latest_candlesticks[2])
+        low = float(latest_candlesticks[3])
+        close = float(latest_candlesticks[4])
+        volume = float(latest_candlesticks[5])
+    except TypeError:
+        print('!!!!! Error in get_okcoin_asset_price for {}'.format(symbol))
+        open_ = high = low = close = volume = None
+
     ret = {
-        'open': float(latest_candlesticks[1]),
-        'high': float(latest_candlesticks[2]),
-        'low': float(latest_candlesticks[3]),
-        'close': float(latest_candlesticks[4]),
-        'volume': float(latest_candlesticks[5]),
+        'open': open_,
+        'high': high,
+        'low': low,
+        'close': close,
+        'volume': volume,
     }
 
     return ret
@@ -232,9 +252,15 @@ def get_binance_us_asset_price(symbol):
     url = '{}/api/v3/ticker/price?symbol={}'.format(BINANCE_US_BASE_URL, symbol)
     resp = requests.get(url)
     resp_data = resp.json()
+    try:
+        price = float(resp_data.get('price'))
+    except TypeError:
+        print('!!!!! Error in get_binance_us_asset_price for {}'.format(symbol))
+        price = None
+
     ret = {
         'symbol': resp_data.get('symbol'),
-        'price': float(resp_data.get('price')),
+        'price': price,
     }
     return ret
 
@@ -275,11 +301,20 @@ def get_coinbase_asset_price(symbol):
     url = '{}/products/{}/ticker'.format(COINBASE_BASE_URL, symbol)
     resp = requests.get(url)
     resp_data = resp.json()
+    try:
+        ask = float(resp_data.get('ask'))
+        bid = float(resp_data.get('bid'))
+        volume = float(resp_data.get('volume'))
+        price = float(resp_data.get('price'))
+    except TypeError:
+        print('!!!!! Error in get_coinbase_asset_price for {}'.format(symbol))
+        ask = bid = volume = price = None
+
     ret = {
-        'ask': float(resp_data.get('ask')),
-        'bid': float(resp_data.get('bid')),
-        'volume': float(resp_data.get('volume')),
-        'price': float(resp_data.get('price')),
+        'ask': ask,
+        'bid': bid,
+        'volume': volume,
+        'price': price,
     }
     return ret
 
@@ -323,10 +358,18 @@ def get_ftx_us_asset_price(symbol):
         return {}
 
     result = data.get('result', {})
+    try:
+        bid = float(result.get('bid'))
+        ask = float(result.get('ask'))
+        price = float(result.get('price'))
+    except TypeError:
+        print('!!!!! Error in get_ftx_us_asset_price for {}'.format(symbol))
+        bid = ask = price = None
+
     ret = {
-        'bid': float(result.get('bid')),
-        'ask': float(result.get('ask')),
-        'price': float(result.get('price')),
+        'bid': bid,
+        'ask': ask,
+        'price': price,
     }
     return ret
 
@@ -391,12 +434,22 @@ def get_kraken_asset_price(symbol):
     result = data.get('result', {})
     r_key = list(result.keys())[0]
     price_data = result.get(r_key)
+    try:
+        price = float(price_data.get('c')[0])
+        low = float(price_data.get('l')[0])
+        high = float(price_data.get('h')[0])
+        ask = float(price_data.get('a')[0])
+        bid = float(price_data.get('b')[0])
+    except TypeError:
+        print('!!!!! Error in get_kraken_asset_price for {}'.format(symbol))
+        price = low = high = ask = bid = None
+
     ret = {
-        'price': float(price_data.get('c')[0]),
-        'low': float(price_data.get('l')[0]),
-        'high': float(price_data.get('h')[0]),
-        'ask': float(price_data.get('a')[0]),
-        'bid': float(price_data.get('b')[0]),
+        'price': price,
+        'low': low,
+        'high': high,
+        'ask': ask,
+        'bid': bid,
     }
     return ret
 
