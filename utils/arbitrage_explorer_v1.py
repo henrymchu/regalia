@@ -64,14 +64,15 @@ def discover():
                 # Add list of prices for a single asset into map keyed by ticker
                 asset_prices_by_ticker[ticker] = single_asset_prices
                 info = get_price_delta(single_asset_prices)
-                print('{}: delta: {}% - {} {} - {} {}'.format(
-                    ticker,
-                    info['percentage_delta'],
-                    info['low'],
-                    info['cheap_exchange'],
-                    info['high'],
-                    info['expensive_exchange']
-                ))
+                if info['percentage_delta']:
+                    print('{}: delta: {}% - {} {} - {} {}'.format(
+                        ticker,
+                        round(info['percentage_delta'], 3),
+                        info['low'],
+                        info['cheap_exchange'],
+                        info['high'],
+                        info['expensive_exchange']
+                    ))
 
         for ticker in small_ticker_group:
             print('----- {} -----'.format(ticker))
@@ -94,9 +95,9 @@ def discover():
 
     for ticker in asset_price_delta_as_percentage_of_min_price.keys():
         info = asset_price_delta_as_percentage_of_min_price[ticker]
-        print('{}: percentage: {} - min: {} {} - max: {} {}'.format(
+        print('{}: percentage: {}% - min: {} {} - max: {} {}'.format(
             ticker,
-            info['percentage_delta'],
+            round(info['percentage_delta'], 3),
             info['low'],
             info['cheap_exchange'],
             info['high'],
@@ -108,9 +109,9 @@ def discover():
         info = asset_price_delta_as_percentage_of_min_price[ticker]
         pdelta = info['percentage_delta']
         if pdelta and pdelta >= 4.5:
-            print('{}: percentage: {} - min: {} {} - max: {} {}'.format(
+            print('{}: percentage: {}% - min: {} {} - max: {} {}'.format(
                 ticker,
-                info['percentage_delta'],
+                round(info['percentage_delta'], 3),
                 info['low'],
                 info['cheap_exchange'],
                 info['high'],
