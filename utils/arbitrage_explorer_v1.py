@@ -29,8 +29,8 @@ from exchange_apis import (
 )
 
 
-TICKER_GROUP_SIZE = 5
-WAIT_TIME_SECONDS = 30
+TICKER_GROUP_SIZE = 9
+WAIT_TIME_SECONDS = 12
 EXCHANGE_IDS = [BINANCE_US_ID, COINBASE_ID, FTX_US_ID, GEMINI_ID, KRAKEN_ID, OKCOIN_ID]
 
 
@@ -63,7 +63,15 @@ def discover():
 
                 # Add list of prices for a single asset into map keyed by ticker
                 asset_prices_by_ticker[ticker] = single_asset_prices
-                time.sleep(1)
+                info = get_price_delta(single_asset_prices)
+                print('{}: delta: {}% - {} {} - {} {}'.format(
+                    ticker,
+                    info['percentage_delta'],
+                    info['low'],
+                    info['cheap_exchange'],
+                    info['high'],
+                    info['expensive_exchange']
+                ))
 
         for ticker in small_ticker_group:
             print('----- {} -----'.format(ticker))
@@ -71,6 +79,43 @@ def discover():
 
         # Wait before starting next ticker group to avoid hitting rate limits
         time.sleep(WAIT_TIME_SECONDS)
+
+    # Go through asset prices by ticker and look for price deltas
+    asset_price_delta_as_percentage_of_min_price = {}
+    for ticker in asset_prices_by_ticker.keys():
+        delta_info = get_price_delta(asset_prices_by_ticker[ticker])
+        asset_price_delta_as_percentage_of_min_price[ticker] = {
+            'percentage_delta': delta_info['percentage_delta'],
+            'low': delta_info['low'],
+            'cheap_exchange': delta_info['cheap_exchange'],
+            'high': delta_info['high'],
+            'expensive_exchange': delta_info['expensive_exchange'],
+        }
+
+    for ticker in asset_price_delta_as_percentage_of_min_price.keys():
+        info = asset_price_delta_as_percentage_of_min_price[ticker]
+        print('{}: percentage: {} - min: {} {} - max: {} {}'.format(
+            ticker,
+            info['percentage_delta'],
+            info['low'],
+            info['cheap_exchange'],
+            info['high'],
+            info['expensive_exchange'],
+        ))
+
+    print('----- Greater than 4.5% deltas -----')
+    for ticker in asset_price_delta_as_percentage_of_min_price.keys():
+        info = asset_price_delta_as_percentage_of_min_price[ticker]
+        pdelta = info['percentage_delta']
+        if pdelta and pdelta >= 4.5:
+            print('{}: percentage: {} - min: {} {} - max: {} {}'.format(
+                ticker,
+                info['percentage_delta'],
+                info['low'],
+                info['cheap_exchange'],
+                info['high'],
+                info['expensive_exchange'],
+            ))
 
 
 def get_unique_tickers_and_availability_matrix():
@@ -120,3 +165,44 @@ def segment_groups_of_n(input_tickers, group_size=15):
         chunk_of_tickers = input_tickers[starting_index:ending_index]
         segmented_groups.append(chunk_of_tickers)
     return segmented_groups
+
+
+def get_price_delta(asset_prices):
+    """Identifies price delta as a percentage of the smallest price.
+    :arg: asset_prices: list of tuples; each tuple's first item is an exchange identifier and second item is a price
+
+    :returns: percentage_delta: float
+              cheap_price: float
+              cheap_exchange: str
+              expensive_price: float
+              expensive_exchange: str
+    """
+    prices = []
+    for i in range(len(asset_prices)):
+        if asset_prices[1]:
+            prices.append(asset_prices[i])
+    try:
+        prices.sort(key=lambda x: x[1])
+    except TypeError:
+        print('error in get_prices_delta - possible comparison with float and None')
+        return {
+            'percentage_delta': None,
+            'low': None,
+            'cheap_exchange': None,
+            'high': None,
+            'expensive_exchange': None,
+        }
+
+    cheap = prices[0][1]
+    expensive = prices[-1][1]
+    percentage_delta = (expensive - cheap) / cheap * 100.0
+    cheap_exchange = prices[0][0]
+    expensive_exchange = prices[-1][0]
+
+    return {
+        'percentage_delta': percentage_delta,
+        'low': cheap,
+        'cheap_exchange': cheap_exchange,
+        'high': expensive,
+        'expensive_exchange': expensive_exchange,
+    }
