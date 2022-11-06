@@ -3,6 +3,7 @@
 # Python imports
 import collections
 # TODO Figure out how these imports work to not have to use sys.path.append
+import json.decoder
 import sys
 sys.path.append("..")  # Adds higher directory to python modules path.
 from constants import (
@@ -352,9 +353,13 @@ def get_ftx_us_asset_price(symbol):
     """
     url = '{}/api/markets/{}'.format(FTX_US_BASE_URL, symbol)
     resp = requests.get(url)
-    data = resp.json()
-    if not data.get('success'):
-        print('failed to get a successful response from {}/api/markets/{}'.format(FTX_US_BASE_URL, symbol))
+    try:
+        data = resp.json()
+        if not data.get('success'):
+            print('failed to get a successful response from {}/api/markets/{}'.format(FTX_US_BASE_URL, symbol))
+            return {}
+    except json.decoder.JSONDecodeError:
+        print('failed to JSON decode response from {}/api/markets/{}'.format(FTX_US_BASE_URL, symbol))
         return {}
 
     result = data.get('result', {})
