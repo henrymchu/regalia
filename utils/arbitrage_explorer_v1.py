@@ -29,8 +29,8 @@ from exchange_apis import (
 )
 
 
-TICKER_GROUP_SIZE = 9
-WAIT_TIME_SECONDS = 12
+TICKER_GROUP_SIZE = 10
+WAIT_TIME_SECONDS = 11
 EXCHANGE_IDS = [BINANCE_US_ID, COINBASE_ID, FTX_US_ID, GEMINI_ID, KRAKEN_ID, OKCOIN_ID]
 
 
@@ -95,14 +95,15 @@ def discover():
 
     for ticker in asset_price_delta_as_percentage_of_min_price.keys():
         info = asset_price_delta_as_percentage_of_min_price[ticker]
-        print('{}: percentage: {}% - min: {} {} - max: {} {}'.format(
-            ticker,
-            round(info['percentage_delta'], 3),
-            info['low'],
-            info['cheap_exchange'],
-            info['high'],
-            info['expensive_exchange'],
-        ))
+        if info['percentage_delta']:
+            print('{}: percentage: {}% - min: {} {} - max: {} {}'.format(
+                ticker,
+                round(info['percentage_delta'], 3),
+                info['low'],
+                info['cheap_exchange'],
+                info['high'],
+                info['expensive_exchange'],
+            ))
 
     print('----- Greater than 4.5% deltas -----')
     for ticker in asset_price_delta_as_percentage_of_min_price.keys():
