@@ -217,6 +217,37 @@ def get_okcoin_asset_price(symbol):
     return ret
 
 
+def get_okcoin_order_book(symbol, size=5):
+    """Retrieves details on an Okcoin order book for a single asset.
+    :arg symbol: string for trading pair {BTC-USD|ETH-USD}
+    :arg size: int
+
+    :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
+    """
+    url = '{}/api/spot/v3/instruments/{}/book?size={}'.format(OKCOIN_BASE_URL, symbol, size)
+    resp = requests.get(url)
+    resp_data = resp.json()
+    asks = resp_data.get('asks')
+    bids = resp_data.get('bids')
+    min_ask = asks[0]
+    max_bid = bids[0]
+
+    sums_asks = 0
+    sum_bids = 0
+    for i in range(min(len(asks), size)):
+        sums_asks += (asks[i][0] * asks[i][1])
+
+    for i in range(min(len(bids), size)):
+        sum_bids += (bids[i][0] * bids[i[1]])
+
+    return {
+        'min_ask': min_ask,
+        'max_bid': max_bid,
+        'dollar_value_min_asks': sums_asks,
+        'dollar_value_max_bids': sum_bids,
+    }
+
+
 def get_okcoin_usd_trading_pairs():
     """Identifies all assets trading on Okcoin against US dollar.
 

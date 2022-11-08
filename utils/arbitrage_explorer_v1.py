@@ -28,7 +28,6 @@ from exchange_apis import (
     get_asset_price_at_exchange,
 )
 
-
 TICKER_GROUP_SIZE = 10
 WAIT_TIME_SECONDS = 11
 EXCHANGE_IDS = [BINANCE_US_ID, COINBASE_ID, FTX_US_ID, GEMINI_ID, KRAKEN_ID, OKCOIN_ID]
