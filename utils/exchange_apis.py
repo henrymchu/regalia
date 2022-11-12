@@ -297,6 +297,22 @@ def get_binance_us_asset_price(symbol):
     return ret
 
 
+def get_binance_us_order_book(symbol, size=5):
+    """Retrieves details on an Binance.US order book for a single asset.
+    :arg symbol: string for trading pair {BTCUSD|ETHUSD}
+    :arg size: int
+
+    :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
+
+    Notes
+        Get Best Order Book Price
+        GET /api/v3/ticker/bookTicker
+
+    """
+    url = ''.format(BINANCE_US_BASE_URL, symbol, size)
+    pass
+
+
 def get_binance_us_usd_trading_pairs():
     """Identifies all assets trading on Binance.US against US dollar.
 
