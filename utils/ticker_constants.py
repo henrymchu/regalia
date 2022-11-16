@@ -35,13 +35,6 @@ KNOWN_COINBASE_ASSETS = [
     'WCFG', 'WLUNA', 'XCN', 'XLM', 'XRP', 'XTZ', 'XYO', 'YFI', 'YFII', 'ZEC', 'ZEN', 'ZRX'
 ]
 
-# Last updated 2022-10-31
-KNOWN_FTX_US_ASSETS = [
-    'AAVE', 'ALGO', 'AUD', 'AVAX', 'BAT', 'BCH', 'BRZ', 'BTC', 'CAD', 'CUSDT', 'DAI', 'DOGE', 'ETH', 'ETHW', 'EUR',
-    'GBP', 'GRT', 'KSHIB', 'LINK', 'LTC', 'MATIC', 'MKR', 'NEAR', 'PAXG', 'SHIB', 'SOL', 'SUSHI', 'TRX', 'UNI',
-    'USDT', 'WBTC', 'YFI'
-]
-
 # Last updated 2022-11-01
 KNOWN_KRAKEN_ASSETS = [
     '1INCH', 'AAVE', 'ACA', 'ACH', 'ADA', 'ADX', 'AGLD', 'AIR', 'AKT', 'ALCX', 'ALGO', 'ALICE', 'ALPHA', 'ANKR',
@@ -89,7 +82,6 @@ SINGLE_TICKER_IDENTIFIERS_USD = {
         'name': 'bitcoin',
         'binance.us': 'BTCUSD',
         'coinbase': 'BTC-USD',
-        'ftx.us': 'BTC/USD',
         'gemini': 'BTCUSD',
         'kraken': 'BTCUSD',
         'okcoin': 'BTC-USD',

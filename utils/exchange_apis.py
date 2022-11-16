@@ -9,7 +9,6 @@ sys.path.append("..")  # Adds higher directory to python modules path.
 from constants import (
     BINANCE_US_ID,
     COINBASE_ID,
-    FTX_US_ID,
     GEMINI_ID,
     KRAKEN_ID,
     OKCOIN_ID,
@@ -22,7 +21,6 @@ import requests
 from ticker_constants import (
     KNOWN_BINANCE_US_ASSETS,
     KNOWN_COINBASE_ASSETS,
-    KNOWN_FTX_US_ASSETS,
     KNOWN_GEMINI_ASSETS,
     KNOWN_KRAKEN_ASSETS,
     KNOWN_OKCOIN_ASSETS,
@@ -32,7 +30,6 @@ from ticker_constants import (
 BINANCE_US_BASE_URL = 'https://api.binance.us'
 COINBASE_BASE_URL = 'https://api.exchange.coinbase.com'
 CRYPTO_COM_BASE_URL = 'https://api.crypto.com'
-FTX_US_BASE_URL = 'https://ftx.us'
 GEMINI_BASE_URL = 'https://api.gemini.com'
 KRAKEN_BASE_URL = 'https://api.kraken.com'
 KUCOIN_BASE_URL = 'https://api.kucoin.com'
@@ -51,8 +48,6 @@ def convert_ticker_to_symbol(ticker, exchange_id):
         url_symbol = '{}USD'.format(ticker.upper())
     elif exchange_id in [COINBASE_ID, OKCOIN_ID]:
         url_symbol = '{}-USD'.format(ticker.upper())
-    elif exchange_id == FTX_US_ID:
-        url_symbol = '{}/USD'.format(ticker.upper())
     elif exchange_id == GEMINI_ID:
         url_symbol = '{}usd'.format(ticker.lower())
     else:
@@ -74,9 +69,6 @@ def get_asset_price_at_exchange(ticker, exchange_id):
         return price_info.get('price')
     elif exchange_id == COINBASE_ID:
         price_info = get_coinbase_asset_price(symbol)
-        return price_info.get('price')
-    elif exchange_id == FTX_US_ID:
-        price_info = get_ftx_us_asset_price(symbol)
         return price_info.get('price')
     elif exchange_id == GEMINI_ID:
         price_info = get_gemini_asset_price(symbol)
@@ -389,71 +381,6 @@ def get_coinbase_usd_trading_pairs():
             print('Unknown Coinbase trading pair encountered: {}'.format(base_currency))
 
     _ = check_for_delisting(KNOWN_COINBASE_ASSETS, usd_assets, 'Coinbase')
-    return usd_assets
-
-
-def get_ftx_us_asset_price(symbol):
-    """Identifies current asset price on FTX.us.
-    :arg symbol: string for trading pair {BTC/USD|ETH/USD}
-
-    :returns: dict with bid/ask/price/last
-    """
-    url = '{}/api/markets/{}'.format(FTX_US_BASE_URL, symbol)
-    resp = requests.get(url)
-    try:
-        data = resp.json()
-        if not data.get('success'):
-            print('failed to get a successful response from {}/api/markets/{}'.format(FTX_US_BASE_URL, symbol))
-            return {}
-    except json.decoder.JSONDecodeError:
-        print('failed to JSON decode response from {}/api/markets/{}'.format(FTX_US_BASE_URL, symbol))
-        return {}
-
-    result = data.get('result', {})
-    try:
-        bid = float(result.get('bid'))
-        ask = float(result.get('ask'))
-        price = float(result.get('price'))
-    except TypeError:
-        print('!!!!! Error in get_ftx_us_asset_price for {}'.format(symbol))
-        bid = ask = price = None
-
-    ret = {
-        'bid': bid,
-        'ask': ask,
-        'price': price,
-    }
-    return ret
-
-
-def get_ftx_us_usd_trading_pairs():
-    """Identifies all assets trading on FTX.US against US dollar.
-
-    :returns: list of tickers
-
-    Notes:
-        https://docs.ftx.us/#overview
-        https://ftx.us/api/markets/BTC/USD
-        https://help.ftx.com/hc/en-us/articles/360052595091-2020-11-20-Ratelimit-Updates
-    """
-    url = '{}/api/markets'.format(FTX_US_BASE_URL)
-    resp = requests.get(url)
-    data = resp.json()
-    if not data.get('success'):
-        print('failed to get a successful response from https://ftx.us/api/markets')
-        return []
-
-    usd_assets = []
-    results = data['result']
-    for result in results:
-        raw_name = result.get('name')
-        pair = raw_name.split('/')
-        if pair[1] == 'USD' and pair[0] not in KNOWN_FTX_US_ASSETS:
-            print('Unknown FTX.US trading pair encountered: {}'.format(raw_name))
-        elif pair[1] == 'USD':
-            usd_assets.append(pair[0])
-
-    _ = check_for_delisting(KNOWN_FTX_US_ASSETS, usd_assets, 'FTX.US')
     return usd_assets
 
 

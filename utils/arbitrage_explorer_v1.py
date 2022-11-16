@@ -11,7 +11,6 @@ sys.path.append("..")  # Adds higher directory to python modules path.
 from constants import (
     BINANCE_US_ID,
     COINBASE_ID,
-    FTX_US_ID,
     GEMINI_ID,
     KRAKEN_ID,
     OKCOIN_ID,
@@ -21,7 +20,6 @@ from constants import (
 from exchange_apis import (
     get_binance_us_usd_trading_pairs,
     get_coinbase_usd_trading_pairs,
-    get_ftx_us_usd_trading_pairs,
     get_gemini_usd_trading_pairs,
     get_kraken_usd_trading_pairs,
     get_okcoin_usd_trading_pairs,
@@ -30,7 +28,7 @@ from exchange_apis import (
 
 TICKER_GROUP_SIZE = 10
 WAIT_TIME_SECONDS = 11
-EXCHANGE_IDS = [BINANCE_US_ID, COINBASE_ID, FTX_US_ID, GEMINI_ID, KRAKEN_ID, OKCOIN_ID]
+EXCHANGE_IDS = [BINANCE_US_ID, COINBASE_ID, GEMINI_ID, KRAKEN_ID, OKCOIN_ID]
 
 
 def discover():
@@ -48,7 +46,6 @@ def discover():
             # If an asset if only available on one exchange, there's no reason to look for arbitrage
             sum_of_availability = availability[BINANCE_US_ID].get(ticker, 0) + \
                 availability[COINBASE_ID].get(ticker, 0) + \
-                availability[FTX_US_ID].get(ticker, 0) + \
                 availability[GEMINI_ID].get(ticker, 0) + \
                 availability[KRAKEN_ID].get(ticker, 0) + \
                 availability[OKCOIN_ID].get(ticker, 0)
@@ -133,9 +130,6 @@ def get_unique_tickers_and_availability_matrix():
     for asset in get_coinbase_usd_trading_pairs():
         unique_tickers.add(asset)
         availability_matrix[COINBASE_ID][asset] = 1
-    for asset in get_ftx_us_usd_trading_pairs():
-        unique_tickers.add(asset)
-        availability_matrix[FTX_US_ID][asset] = 1
     for asset in get_gemini_usd_trading_pairs():
         unique_tickers.add(asset)
         availability_matrix[GEMINI_ID][asset] = 1
