@@ -6,7 +6,6 @@ from .constants import (
     COINBASE_ID,
     KRAKEN_ID,
     OKCOIN_ID,
-    FTX_US_ID,
     CRYPTO_COM_ID,
 )
 
