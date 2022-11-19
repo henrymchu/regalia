@@ -15,7 +15,7 @@ KNOWN_BINANCE_US_ASSETS = [
     'ZIL', 'ZRX'
 ]
 
-# Last updated 2022-11-18
+# Last updated 2022-11-19
 KNOWN_COINBASE_ASSETS = [
     '00', '1INCH', 'AAVE', 'ABT', 'ACH', 'ADA', 'AERGO', 'AGLD', 'AIOZ', 'ALCX', 'ALEPH', 'ALGO', 'ALICE', 'AMP',
     'ANKR', 'APE', 'API3', 'APT', 'ARPA', 'ASM', 'AST', 'ATA', 'ATOM', 'AUCTION', 'AURORA', 'AVAX', 'AVT', 'AXS',
@@ -23,16 +23,16 @@ KNOWN_COINBASE_ASSETS = [
     'C98', 'CBETH', 'CELR', 'CGLD', 'CHZ', 'CLV', 'COMP', 'COTI', 'COVAL', 'CRO', 'CRPT', 'CRV', 'CTSI', 'CTX',
     'CVC', 'CVX', 'DAI', 'DAR', 'DASH', 'DDX', 'DESO', 'DEXT', 'DIA', 'DNT', 'DOGE', 'DOT', 'DREP', 'DYP', 'ELA',
     'ENJ', 'ENS', 'EOS', 'ERN', 'ETC', 'ETH', 'FARM', 'FET', 'FIDA', 'FIL', 'FIS', 'FLOW', 'FORT', 'FORTH', 'FOX',
-    'FX', 'GAL', 'GALA', 'GFI', 'GLM', 'GMT', 'GNO', 'GODS', 'GRT', 'GST', 'GTC', 'GUSD', 'GYEN', 'HBAR', 'HIGH',
-    'HOPR', 'ICP', 'IDEX', 'ILV', 'IMX', 'INDEX', 'INJ', 'INV', 'IOTX', 'JASMY', 'JUP', 'KEEP', 'KNC', 'KRL', 'KSM',
-    'LCX', 'LDO', 'LINK', 'LOKA', 'LOOM', 'LPT', 'LQTY', 'LRC', 'LTC', 'MANA', 'MASK', 'MATH', 'MATIC', 'MCO2', 'MDT',
-    'MEDIA', 'METIS', 'MINA', 'MIR', 'MKR', 'MLN', 'MNDE', 'MONA', 'MPL', 'MSOL', 'MTL', 'MUSD', 'MUSE', 'MXC', 'NCT',
-    'NEAR', 'NEST', 'NKN', 'NMR', 'NU', 'OCEAN', 'OGN', 'OMG', 'OOKI', 'OP', 'ORCA', 'ORN', 'OXT', 'PAX', 'PERP',
-    'PLA', 'PLU', 'PNG', 'POLS', 'POLY', 'POND', 'POWR', 'PRO', 'PRQ', 'PUNDIX', 'QNT', 'QSP', 'QUICK', 'RAD', 'RAI',
-    'RARE', 'RARI', 'RBN', 'REN', 'REP', 'REQ', 'RGT', 'RLC', 'RLY', 'RNDR', 'ROSE', 'SAND', 'SHIB', 'SHPING', 'SKL',
-    'SNT', 'SNX', 'SOL', 'SPELL', 'STG', 'STORJ', 'STX', 'SUKU', 'SUPER', 'SUSHI', 'SWFTC', 'SYLO', 'SYN', 'TIME',
-    'TONE', 'TRAC', 'TRB', 'TRIBE', 'TRU', 'UMA', 'UNFI', 'UNI', 'UPI', 'USDT', 'UST', 'VGX', 'WAMPL', 'WAXL', 'WBTC',
-    'WCFG', 'WLUNA', 'XCN', 'XLM', 'XRP', 'XTZ', 'XYO', 'YFI', 'YFII', 'ZEC', 'ZEN', 'ZRX'
+    'FX', 'GAL', 'GALA', 'GFI', 'GLM', 'GMT', 'GNO', 'GODS', 'GRT', 'GST', 'GTC', 'GUSD', 'GYEN', 'HBAR', 'HFT',
+    'HIGH', 'HOPR', 'ICP', 'IDEX', 'ILV', 'IMX', 'INDEX', 'INJ', 'INV', 'IOTX', 'JASMY', 'JUP', 'KEEP', 'KNC', 'KRL',
+    'KSM', 'LCX', 'LDO', 'LINK', 'LOKA', 'LOOM', 'LPT', 'LQTY', 'LRC', 'LTC', 'MANA', 'MASK', 'MATH', 'MATIC', 'MCO2',
+    'MDT', 'MEDIA', 'METIS', 'MINA', 'MIR', 'MKR', 'MLN', 'MNDE', 'MONA', 'MPL', 'MSOL', 'MTL', 'MUSD', 'MUSE', 'MXC',
+    'NCT', 'NEAR', 'NEST', 'NKN', 'NMR', 'NU', 'OCEAN', 'OGN', 'OMG', 'OOKI', 'OP', 'ORCA', 'ORN', 'OXT', 'PAX',
+    'PERP', 'PLA', 'PLU', 'PNG', 'POLS', 'POLY', 'POND', 'POWR', 'PRO', 'PRQ', 'PUNDIX', 'QNT', 'QSP', 'QUICK', 'RAD',
+    'RAI', 'RARE', 'RARI', 'RBN', 'REN', 'REP', 'REQ', 'RGT', 'RLC', 'RLY', 'RNDR', 'ROSE', 'SAND', 'SHIB', 'SHPING',
+    'SKL', 'SNT', 'SNX', 'SOL', 'SPELL', 'STG', 'STORJ', 'STX', 'SUKU', 'SUPER', 'SUSHI', 'SWFTC', 'SYLO', 'SYN',
+    'TIME', 'TONE', 'TRAC', 'TRB', 'TRIBE', 'TRU', 'UMA', 'UNFI', 'UNI', 'UPI', 'USDT', 'UST', 'VGX', 'WAMPL', 'WAXL',
+    'WBTC', 'WCFG', 'WLUNA', 'XCN', 'XLM', 'XRP', 'XTZ', 'XYO', 'YFI', 'YFII', 'ZEC', 'ZEN', 'ZRX'
 ]
 
 # Last updated 2022-11-18
