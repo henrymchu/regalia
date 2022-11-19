@@ -1,21 +1,21 @@
 # Assets with USD trading pairs
 
-# Last updated 2022-11-01
+# Last updated 2022-11-18
 KNOWN_BINANCE_US_ASSETS = [
-    '1INCH', 'AAVE', 'ACH', 'ADA', 'ALGO', 'ALICE', 'ALPINE', 'AMP', 'ANKR', 'ANT', 'APE', 'API3', 'ASTR', 'ATOM',
-    'AUDIO', 'AVAX', 'AXS', 'BAND', 'BAL', 'BAT', 'BCH', 'BICO', 'BNB', 'BNT', 'BOND', 'BTC', 'BTRST', 'BUSD',
-    'CELO', 'CELR', 'CHZ', 'CLV', 'COMP', 'COTI', 'CRV', 'CTSI', 'DAI', 'DAR', 'DASH', 'DGB', 'DOGE', 'DOT',
+    '1INCH', 'AAVE', 'ACH', 'ADA', 'ALGO', 'ALICE', 'ALPINE', 'AMP', 'ANKR', 'ANT', 'APE', 'API3', 'APT', 'ASTR',
+    'ATOM', 'AUDIO', 'AVAX', 'AXL', 'AXS', 'BAND', 'BAL', 'BAT', 'BCH', 'BICO', 'BNB', 'BNT', 'BOND', 'BTC', 'BTRST',
+    'BUSD', 'CELO', 'CELR', 'CHZ', 'CLV', 'COMP', 'COTI', 'CRV', 'CTSI', 'DAI', 'DAR', 'DASH', 'DGB', 'DOGE', 'DOT',
     'EGLD', 'ENJ', 'ENS', 'EOS', 'ETC', 'ETH', 'FET', 'FIL', 'FLOW', 'FLUX', 'FORTH', 'FTM', 'GAL', 'GALA', 'GLM',
-    'GRT', 'GTC', 'HBAR', 'HNT', 'ICP', 'ICX', 'ILV', 'IMX', 'IOTA', 'JASMY', 'KDA', 'KNC', 'KSHIB', 'KSM', 'LAZIO',
-    'LDO', 'LINK', 'LOKA', 'LPT', 'LRC', 'LSK', 'LTC', 'LTO', 'MANA', 'MATIC', 'MKR', 'NANO', 'NEAR', 'NEO', 'NMR',
-    'OCEAN', 'OGN', 'OMG', 'ONE', 'ONT', 'OP', 'OXT', 'PAXG', 'POLY', 'POLYX', 'PORTO', 'QNT', 'QTUM', 'RAD', 'RARE',
-    'REEF', 'REN', 'REP', 'REQ', 'RLC', 'RNDR', 'ROSE', 'RVN', 'SAND', 'SANTOS', 'SKL', 'SLP', 'SNX', 'SOL',
-    'SPELL', 'SRM', 'STORJ', 'SUSHI', 'SYS', 'T', 'TFUEL', 'THETA', 'TLM', 'TRX', 'TUSD', 'UNI', 'USDC', 'USDT',
-    'UST', 'VET', 'VITE', 'VOXEL', 'VTHO', 'WAVES', 'WAXP', 'XLM', 'XNO', 'XRP', 'XTZ', 'YFI', 'ZEC', 'ZEN', 'ZIL',
-    'ZRX'
+    'GRT', 'GTC', 'HBAR', 'HNT', 'ICP', 'ICX', 'ILV', 'IMX', 'IOTA', 'JASMY', 'KAVA', 'KDA', 'KNC', 'KSHIB', 'KSM',
+    'LAZIO', 'LDO', 'LINK', 'LOKA', 'LPT', 'LRC', 'LSK', 'LTC', 'LTO', 'MANA', 'MATIC', 'MKR', 'NANO', 'NEAR', 'NEO',
+    'NMR', 'OCEAN', 'OGN', 'OMG', 'ONE', 'ONT', 'OP', 'OXT', 'PAXG', 'POLY', 'POLYX', 'PORTO', 'QNT', 'QTUM', 'RAD',
+    'RARE', 'REEF', 'REN', 'REP', 'REQ', 'RLC', 'RNDR', 'ROSE', 'RVN', 'SAND', 'SANTOS', 'SKL', 'SLP', 'SNX', 'SOL',
+    'SPELL', 'SRM', 'STG', 'STORJ', 'SUSHI', 'SYS', 'T', 'TFUEL', 'THETA', 'TLM', 'TRX', 'TUSD', 'UNI', 'USDC',
+    'USDT', 'UST', 'VET', 'VITE', 'VOXEL', 'VTHO', 'WAVES', 'WAXP', 'XLM', 'XNO', 'XRP', 'XTZ', 'YFI', 'ZEC', 'ZEN',
+    'ZIL', 'ZRX'
 ]
 
-# Last updated 2022-11-02
+# Last updated 2022-11-18
 KNOWN_COINBASE_ASSETS = [
     '00', '1INCH', 'AAVE', 'ABT', 'ACH', 'ADA', 'AERGO', 'AGLD', 'AIOZ', 'ALCX', 'ALEPH', 'ALGO', 'ALICE', 'AMP',
     'ANKR', 'APE', 'API3', 'APT', 'ARPA', 'ASM', 'AST', 'ATA', 'ATOM', 'AUCTION', 'AURORA', 'AVAX', 'AVT', 'AXS',
@@ -25,7 +25,7 @@ KNOWN_COINBASE_ASSETS = [
     'ENJ', 'ENS', 'EOS', 'ERN', 'ETC', 'ETH', 'FARM', 'FET', 'FIDA', 'FIL', 'FIS', 'FLOW', 'FORT', 'FORTH', 'FOX',
     'FX', 'GAL', 'GALA', 'GFI', 'GLM', 'GMT', 'GNO', 'GODS', 'GRT', 'GST', 'GTC', 'GUSD', 'GYEN', 'HBAR', 'HIGH',
     'HOPR', 'ICP', 'IDEX', 'ILV', 'IMX', 'INDEX', 'INJ', 'INV', 'IOTX', 'JASMY', 'JUP', 'KEEP', 'KNC', 'KRL', 'KSM',
-    'LCX', 'LINK', 'LOKA', 'LOOM', 'LPT', 'LQTY', 'LRC', 'LTC', 'MANA', 'MASK', 'MATH', 'MATIC', 'MCO2', 'MDT',
+    'LCX', 'LDO', 'LINK', 'LOKA', 'LOOM', 'LPT', 'LQTY', 'LRC', 'LTC', 'MANA', 'MASK', 'MATH', 'MATIC', 'MCO2', 'MDT',
     'MEDIA', 'METIS', 'MINA', 'MIR', 'MKR', 'MLN', 'MNDE', 'MONA', 'MPL', 'MSOL', 'MTL', 'MUSD', 'MUSE', 'MXC', 'NCT',
     'NEAR', 'NEST', 'NKN', 'NMR', 'NU', 'OCEAN', 'OGN', 'OMG', 'OOKI', 'OP', 'ORCA', 'ORN', 'OXT', 'PAX', 'PERP',
     'PLA', 'PLU', 'PNG', 'POLS', 'POLY', 'POND', 'POWR', 'PRO', 'PRQ', 'PUNDIX', 'QNT', 'QSP', 'QUICK', 'RAD', 'RAI',
@@ -35,15 +35,15 @@ KNOWN_COINBASE_ASSETS = [
     'WCFG', 'WLUNA', 'XCN', 'XLM', 'XRP', 'XTZ', 'XYO', 'YFI', 'YFII', 'ZEC', 'ZEN', 'ZRX'
 ]
 
-# Last updated 2022-11-01
+# Last updated 2022-11-18
 KNOWN_KRAKEN_ASSETS = [
     '1INCH', 'AAVE', 'ACA', 'ACH', 'ADA', 'ADX', 'AGLD', 'AIR', 'AKT', 'ALCX', 'ALGO', 'ALICE', 'ALPHA', 'ANKR',
     'ANT', 'APE', 'API3', 'APT', 'ARPA', 'ASTR', 'ATLAS', 'ATOM', 'AUDIO', 'AUD', 'AVAX', 'AXS', 'BADGER', 'BAL',
     'BAND', 'BAT', 'BCH', 'BICO', 'BIT', 'BLZ', 'BNC', 'BNT', 'BOBA', 'BOND', 'BSX', 'BTC', 'BTT', 'C98', 'CELR',
     'CFG', 'CHR', 'CHZ', 'COMP', 'COTI', 'CQT', 'CRV', 'CSM', 'CTSI', 'CVC', 'CVX', 'DAI', 'DASH', 'DENT', 'DOT',
     'DYDX', 'EGLD', 'ENJ', 'ENS', 'EOS', 'ETHW', 'EWT', 'FARM', 'FET', 'FIDA', 'FIL', 'FIS', 'FLOW', 'FORTH', 'FTM',
-    'FXS', 'GALA', 'GAL', 'GARI', 'GHST', 'GLMR', 'GMT', 'GNO', 'GRT', 'GST', 'GTC', 'ICP', 'ICX', 'IDEX', 'IMX',
-    'INJ', 'INTR', 'JASMY', 'JUNO', 'KAR', 'KAVA', 'KEEP', 'KEY', 'KILT', 'KINT', 'KIN', 'KNC', 'KP3R', 'KSM',
+    'FXS', 'GALA', 'GAL', 'GARI', 'GHST', 'GLMR', 'GMT', 'GNO', 'GRT', 'GST', 'GTC', 'HFT', 'ICP', 'ICX', 'IDEX',
+    'IMX', 'INJ', 'INTR', 'JASMY', 'JUNO', 'KAR', 'KAVA', 'KEEP', 'KEY', 'KILT', 'KINT', 'KIN', 'KNC', 'KP3R', 'KSM',
     'LCX', 'LDO', 'LINK', 'LPT', 'LRC', 'LSK', 'LUNA2', 'LUNA', 'MANA', 'MASK', 'MATIC', 'MC', 'MINA', 'MIR', 'MKR',
     'MNGO', 'MOVR', 'MSOL', 'MULTI', 'MV', 'MXC', 'NANO', 'NEAR', 'NMR', 'NODL', 'NYM', 'OCEAN', 'OGN', 'OMG',
     'ORCA', 'OXT', 'OXY', 'PARA', 'PAXG', 'PERP', 'PHA', 'PLA', 'POLIS', 'POLS', 'POND', 'POWR', 'PSTAKE', 'QNT',
