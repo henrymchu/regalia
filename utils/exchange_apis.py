@@ -116,6 +116,17 @@ def get_gemini_asset_price(symbol):
     return ret
 
 
+def get_gemini_order_book(symbol, size=5):
+    """Retrieves details on Gemini order book for a single asset.
+    :arg symbol: string for trading pair {btcusd|ethusd}
+    :arg size: int
+
+    :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
+    """
+    url = '{}/v1/book/{}'.format(GEMINI_BASE_URL, symbol)
+    return get_order_book_helper(url, size, price_key='price', amount_key='amount')
+
+
 def get_gemini_usd_trading_pairs():
     """Identifies all assets trading on Gemini against US dollar.
 
@@ -339,6 +350,20 @@ def get_coinbase_asset_price(symbol):
     return ret
 
 
+def get_coinbase_order_book(symbol, size=5):
+    """Retrieves details on Coinbase order book for a single asset.
+    :arg symbol: string for trading pair {BTC-USD|ETH-USD}
+    :arg size: int
+
+    :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
+
+    Notes:
+        https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproductbook-1
+    """
+    url = '{}/products/{}/book?level=2'.format(COINBASE_BASE_URL, symbol)
+    return get_order_book_helper(url, size)
+
+
 def get_coinbase_usd_trading_pairs():
     """Identifies all assets trading on Coinbase against US dollar.
 
@@ -362,20 +387,6 @@ def get_coinbase_usd_trading_pairs():
 
     _ = check_for_delisting(KNOWN_COINBASE_ASSETS, usd_assets, 'Coinbase')
     return usd_assets
-
-
-def get_coinbase_order_book(symbol, size=5):
-    """Retrieves details on Coinbase order book for a single asset.
-    :arg symbol: string for trading pair {BTC-USD|ETH-USD}
-    :arg size: int
-
-    :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
-
-    Notes:
-        https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproductbook-1
-    """
-    url = '{}/products/{}/book?level=2'.format(COINBASE_BASE_URL, symbol)
-    return get_order_book_helper(url, size)
 
 
 # -- Crypto.com Notes --
@@ -479,35 +490,43 @@ def check_for_delisting(known_assets, discovered_assets, exchange_name):
     return missing_from_known_assets
 
 
-def get_order_book_helper(full_url, size=5):
+def get_order_book_helper(full_url, size=5, price_key='price', amount_key='amount'):
     """Retrieves details on order book for a single asset.
-    :arg size: int
     :arg full_url: string
+    :arg size: int
+    :arg price_key: string
+    :arg amount_key: string
 
     :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
 
     Notes:
-        Response structure for url must come back as a dictionary with a list of bids/asks.
-        The first item in a bid/ask should be the price and the second item should be a size.
+        1. Response structure for full url can be a dictionary with a list of lists of bids/asks.
+           The first item in a bid/ask should be the price and the second item should be a size.
+        2. Response structure for full url can be a dictionary with a list of dicts of bid/asks.
+           The bid/ask dict will have a price and amount key that can be supplied when the method
+           is called.
     """
+    def sum_bid_or_asks(item_list):
+        sum_dollars = 0
+        for i in range(min(len(item_list), size)):
+            if type(item_list[i]) == list:
+                sum_dollars += (float(item_list[i][0]) * float(item_list[i][1]))
+            elif type(item_list[i]) == dict:
+                sum_dollars += (float(item_list[i][price_key]) * float(item_list[i][amount_key]))
+        return sum_dollars
+
     resp = requests.get(full_url)
     resp_data = resp.json()
     asks = resp_data.get('asks')
     bids = resp_data.get('bids')
     min_ask = asks[0]
     max_bid = bids[0]
-
-    sums_asks = 0
-    sum_bids = 0
-    for i in range(min(len(asks), size)):
-        sums_asks += (float(asks[i][0]) * float(asks[i][1]))
-
-    for i in range(min(len(bids), size)):
-        sum_bids += (float(bids[i][0]) * float(bids[i][1]))
+    sum_asks = sum_bid_or_asks(asks)
+    sum_bids = sum_bid_or_asks(bids)
 
     return {
         'min_ask': min_ask,
         'max_bid': max_bid,
-        'dollar_value_min_asks': sums_asks,
+        'dollar_value_min_asks': sum_asks,
         'dollar_value_max_bids': sum_bids,
     }
