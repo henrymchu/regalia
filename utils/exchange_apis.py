@@ -500,10 +500,10 @@ def get_order_book_helper(full_url, size=5):
     sums_asks = 0
     sum_bids = 0
     for i in range(min(len(asks), size)):
-        sums_asks += (asks[i][0] * asks[i][1])
+        sums_asks += (float(asks[i][0]) * float(asks[i][1]))
 
     for i in range(min(len(bids), size)):
-        sum_bids += (bids[i][0] * bids[i][1])
+        sum_bids += (float(bids[i][0]) * float(bids[i][1]))
 
     return {
         'min_ask': min_ask,
