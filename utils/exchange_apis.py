@@ -217,27 +217,7 @@ def get_okcoin_order_book(symbol, size=5):
     :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
     """
     url = '{}/api/spot/v3/instruments/{}/book?size={}'.format(OKCOIN_BASE_URL, symbol, size)
-    resp = requests.get(url)
-    resp_data = resp.json()
-    asks = resp_data.get('asks')
-    bids = resp_data.get('bids')
-    min_ask = asks[0]
-    max_bid = bids[0]
-
-    sums_asks = 0
-    sum_bids = 0
-    for i in range(min(len(asks), size)):
-        sums_asks += (asks[i][0] * asks[i][1])
-
-    for i in range(min(len(bids), size)):
-        sum_bids += (bids[i][0] * bids[i[1]])
-
-    return {
-        'min_ask': min_ask,
-        'max_bid': max_bid,
-        'dollar_value_min_asks': sums_asks,
-        'dollar_value_max_bids': sum_bids,
-    }
+    return get_order_book_helper(url, size)
 
 
 def get_okcoin_usd_trading_pairs():
@@ -384,6 +364,20 @@ def get_coinbase_usd_trading_pairs():
     return usd_assets
 
 
+def get_coinbase_order_book(symbol, size=5):
+    """Retrieves details on Coinbase order book for a single asset.
+    :arg symbol: string for trading pair {BTC-USD|ETH-USD}
+    :arg size: int
+
+    :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
+
+    Notes:
+        https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getproductbook-1
+    """
+    url = '{}/products/{}/book?level=2'.format(COINBASE_BASE_URL, symbol)
+    return get_order_book_helper(url, size)
+
+
 # -- Crypto.com Notes --
 # https://exchange-docs.crypto.com/spot/index.html#introduction
 # https://api.crypto.com/v2/public/get-instruments
@@ -483,3 +477,37 @@ def check_for_delisting(known_assets, discovered_assets, exchange_name):
             missing_from_known_assets.append(discovered_asset)
 
     return missing_from_known_assets
+
+
+def get_order_book_helper(full_url, size=5):
+    """Retrieves details on order book for a single asset.
+    :arg size: int
+    :arg full_url: string
+
+    :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
+
+    Notes:
+        Response structure for url must come back as a dictionary with a list of bids/asks.
+        The first item in a bid/ask should be the price and the second item should be a size.
+    """
+    resp = requests.get(full_url)
+    resp_data = resp.json()
+    asks = resp_data.get('asks')
+    bids = resp_data.get('bids')
+    min_ask = asks[0]
+    max_bid = bids[0]
+
+    sums_asks = 0
+    sum_bids = 0
+    for i in range(min(len(asks), size)):
+        sums_asks += (asks[i][0] * asks[i][1])
+
+    for i in range(min(len(bids), size)):
+        sum_bids += (bids[i][0] * bids[i][1])
+
+    return {
+        'min_ask': min_ask,
+        'max_bid': max_bid,
+        'dollar_value_min_asks': sums_asks,
+        'dollar_value_max_bids': sum_bids,
+    }
