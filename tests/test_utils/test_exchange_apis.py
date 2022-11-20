@@ -51,9 +51,18 @@ class TestExchangeApisMethods(unittest.TestCase):
         self.assertEqual(order_book_data.get('dollar_value_max_bids'), 4.36)
         self.assertEqual(order_book_data.get('dollar_value_min_asks'), 6.08)
 
-    def test_get_okcoin_order_book(self):
-        # TODO
-        self.assertTrue(True)
+    @patch('requests.get')
+    def test_get_okcoin_order_book(self, mock_get):
+        mock_get.return_value.status_code = 200
+        mock_get.return_value.json.return_value = {
+            'bids': [['1.10', '2.0'], ['1.08', '2.0']],
+            'asks': [['1.50', '2.0'], ['1.54', '2.0']],
+        }
+        order_book_data = get_okcoin_order_book('BTC-USD')
+        self.assertEqual(order_book_data.get('min_ask'), 1.50)
+        self.assertEqual(order_book_data.get('max_bid'), 1.10)
+        self.assertEqual(order_book_data.get('dollar_value_max_bids'), 4.36)
+        self.assertEqual(order_book_data.get('dollar_value_min_asks'), 6.08)
 
     def test_get_binance_us_order_book(self):
         # TODO
