@@ -541,8 +541,17 @@ def get_order_book_helper(full_url, size=5, price_key='price', amount_key='amoun
     resp_data = resp.json()
     asks = resp_data.get('asks')
     bids = resp_data.get('bids')
-    min_ask = asks[0]
-    max_bid = bids[0]
+
+    if type(asks[0]) == list:
+        min_ask = asks[0][0]
+    else:
+        min_ask = asks[0][price_key]
+
+    if type(bids[0]) == list:
+        max_bid = bids[0][0]
+    else:
+        max_bid = bids[0][price_key]
+
     sum_asks = sum_bid_or_asks(asks)
     sum_bids = sum_bid_or_asks(bids)
 
