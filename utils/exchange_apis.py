@@ -18,7 +18,7 @@ from constants import (
 import requests
 
 # Local imports
-from ticker_constants import (
+from .ticker_constants import (
     KNOWN_BINANCE_US_ASSETS,
     KNOWN_COINBASE_ASSETS,
     KNOWN_GEMINI_ASSETS,
