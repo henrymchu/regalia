@@ -537,21 +537,18 @@ def get_order_book_helper(full_url, size=5, price_key='price', amount_key='amoun
                 sum_dollars += (float(item_list[i][price_key]) * float(item_list[i][amount_key]))
         return sum_dollars
 
+    def get_min_ask_or_max_bid(data_input):
+        if type(data_input[0]) == list:
+            return data_input[0][0]
+        else:
+            return data_input[0][price_key]
+
     resp = requests.get(full_url)
     resp_data = resp.json()
     asks = resp_data.get('asks')
     bids = resp_data.get('bids')
-
-    if type(asks[0]) == list:
-        min_ask = asks[0][0]
-    else:
-        min_ask = asks[0][price_key]
-
-    if type(bids[0]) == list:
-        max_bid = bids[0][0]
-    else:
-        max_bid = bids[0][price_key]
-
+    min_ask = get_min_ask_or_max_bid(asks)
+    max_bid = get_min_ask_or_max_bid(bids)
     sum_asks = sum_bid_or_asks(asks)
     sum_bids = sum_bid_or_asks(bids)
 
