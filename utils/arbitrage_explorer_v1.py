@@ -17,7 +17,7 @@ from constants import (
 )
 
 # Local imports
-from exchange_apis import (
+from .exchange_apis import (
     get_binance_us_usd_trading_pairs,
     get_coinbase_usd_trading_pairs,
     get_gemini_usd_trading_pairs,
