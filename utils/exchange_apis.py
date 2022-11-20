@@ -460,6 +460,18 @@ def get_kraken_asset_price(symbol):
     return ret
 
 
+def get_kraken_order_book(symbol, size=5):
+    """Retrieves details on Kraken order book for a single asset.
+    :arg symbol: string for trading pair {BTCUSD|ETHUSD}
+    :arg size: int
+
+    :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
+    """
+    # TODO
+    url = ''.format(KRAKEN_BASE_URL, symbol)
+    return get_order_book_helper(url, size)
+
+
 def get_kraken_usd_trading_pairs():
     """Identifies all assets trading on Kraken against US dollar.
 
