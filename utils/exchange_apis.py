@@ -84,26 +84,26 @@ def get_asset_price_at_exchange(ticker, exchange_id):
         return None
 
 
-def get_asset_order_book_at_exchange(ticker, exchange_id):
+def get_asset_order_book_at_exchange(ticker, exchange_id, size=5):
     """Finds the order book of an asset at an exchange.
     :arg: ticker: str
     :arg: exchange_id: str
+    :arg: size: int
 
     :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
     """
     symbol = convert_ticker_to_symbol(ticker, exchange_id)
     if exchange_id == BINANCE_US_ID:
-        # TODO
-        return {'min_ask': None, 'min_bid': None, 'dollar_value_min_asks': None, 'dollar_value_max_bids': None}
+        return get_binance_us_order_book(symbol, size=size)
     elif exchange_id == COINBASE_ID:
-        return get_coinbase_order_book(symbol)
+        return get_coinbase_order_book(symbol, size=size)
     elif exchange_id == GEMINI_ID:
-        return get_gemini_order_book(symbol)
+        return get_gemini_order_book(symbol, size=size)
     elif exchange_id == KRAKEN_ID:
         # TODO
         return {'min_ask': None, 'min_bid': None, 'dollar_value_min_asks': None, 'dollar_value_max_bids': None}
     elif exchange_id == OKCOIN_ID:
-        return get_okcoin_order_book(symbol)
+        return get_okcoin_order_book(symbol, size=size)
 
 
 # -- Gemini Notes --
@@ -314,8 +314,8 @@ def get_binance_us_order_book(symbol, size=5):
         GET /api/v3/ticker/bookTicker
 
     """
-    url = ''.format(BINANCE_US_BASE_URL, symbol, size)
-    pass
+    url = '{}/api/v3/depth?symbol={}&limit={}'.format(BINANCE_US_BASE_URL, symbol, size)
+    return get_order_book_helper(url, size)
 
 
 def get_binance_us_usd_trading_pairs():
