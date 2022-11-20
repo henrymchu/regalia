@@ -551,9 +551,9 @@ def get_order_book_helper(full_url, size=5, price_key='price', amount_key='amoun
 
     def get_min_ask_or_max_bid(data_input):
         if type(data_input[0]) == list:
-            return data_input[0][0]
+            return float(data_input[0][0])
         else:
-            return data_input[0][price_key]
+            return float(data_input[0][price_key])
 
     resp = requests.get(full_url)
     resp_data = resp.json()
