@@ -90,9 +90,23 @@ class TestExchangeApisMethods(unittest.TestCase):
         self.assertEqual(order_book_data.get('dollar_value_max_bids'), 436.00)
         self.assertEqual(order_book_data.get('dollar_value_min_asks'), 608.00)
 
-    def test_get_kraken_order_book(self):
-        # TODO
-        self.assertTrue(True)
+    @patch('requests.get')
+    def test_get_kraken_order_book(self, mock_get):
+        mock_get.return_value.status_code = 200
+        mock_get.return_value.json.return_value = {
+            'error': [],
+            'result': {
+                'XXBTZUSD': {
+                    'bids': [['1.10', '200', 1669336379], ['1.08', '200', 1669336379]],
+                    'asks': [['1.50', '200', 1669336379], ['1.54', '200', 1669336379]],
+                }
+            }
+        }
+        order_book_data = get_kraken_order_book('BTCUSD')
+        self.assertEqual(order_book_data.get('min_ask'), 1.50)
+        self.assertEqual(order_book_data.get('max_bid'), 1.10)
+        self.assertEqual(order_book_data.get('dollar_value_max_bids'), 436.00)
+        self.assertEqual(order_book_data.get('dollar_value_min_asks'), 608.00)
 
 
 if __name__ == '__main__':

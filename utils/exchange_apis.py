@@ -467,9 +467,29 @@ def get_kraken_order_book(symbol, size=5):
 
     :returns: dict with min_ask/max_bid/dollar_value_min_asks/dollar_value_of_max_bids
     """
-    # TODO
-    url = ''.format(KRAKEN_BASE_URL, symbol)
-    return get_order_book_helper(url, size)
+    url = '{}/0/public/Depth?pair={}'.format(KRAKEN_BASE_URL, symbol)
+    resp = requests.get(url)
+    data = resp.json()
+    if data.get('error'):
+        print('failed to get a successful response from {}/0/public/Depth?pair={}'.format(KRAKEN_BASE_URL, symbol))
+        return {}
+
+    result = data.get('result', {})
+    r_key = list(result.keys())[0]
+    order_book_data = result.get(r_key)
+    asks = order_book_data.get('asks')
+    bids = order_book_data.get('bids')
+    min_ask = get_min_ask_or_max_bid(asks)
+    max_bid = get_min_ask_or_max_bid(bids)
+    sum_asks = sum_bid_or_asks(asks, size)
+    sum_bids = sum_bid_or_asks(bids, size)
+
+    return {
+        'min_ask': min_ask,
+        'max_bid': max_bid,
+        'dollar_value_min_asks': sum_asks,
+        'dollar_value_max_bids': sum_bids,
+    }
 
 
 def get_kraken_usd_trading_pairs():
@@ -524,6 +544,37 @@ def check_for_delisting(known_assets, discovered_assets, exchange_name):
     return missing_from_known_assets
 
 
+def sum_bid_or_asks(item_list, size=5, price_key='price', amount_key='amount'):
+    """Get the dollar volume of best bids or asks.
+    :param item_list: list
+    :param size: int
+    :param price_key: str
+    :param amount_key: str
+
+    :return sum_dollars: float
+    """
+    sum_dollars = 0
+    for i in range(min(len(item_list), size)):
+        if type(item_list[i]) == list:
+            sum_dollars += (float(item_list[i][0]) * float(item_list[i][1]))
+        elif type(item_list[i]) == dict:
+            sum_dollars += (float(item_list[i][price_key]) * float(item_list[i][amount_key]))
+    return sum_dollars
+
+
+def get_min_ask_or_max_bid(data_input, price_key='price'):
+    """Get the min ask or max bid.
+    :param data_input: list
+    :param price_key: str
+
+    :return sum_dollars: float
+    """
+    if type(data_input[0]) == list:
+        return float(data_input[0][0])
+    else:
+        return float(data_input[0][price_key])
+
+
 def get_order_book_helper(full_url, size=5, price_key='price', amount_key='amount'):
     """Retrieves details on order book for a single asset.
     :arg full_url: string
@@ -540,29 +591,14 @@ def get_order_book_helper(full_url, size=5, price_key='price', amount_key='amoun
            The bid/ask dict will have a price and amount key that can be supplied when the method
            is called.
     """
-    def sum_bid_or_asks(item_list):
-        sum_dollars = 0
-        for i in range(min(len(item_list), size)):
-            if type(item_list[i]) == list:
-                sum_dollars += (float(item_list[i][0]) * float(item_list[i][1]))
-            elif type(item_list[i]) == dict:
-                sum_dollars += (float(item_list[i][price_key]) * float(item_list[i][amount_key]))
-        return sum_dollars
-
-    def get_min_ask_or_max_bid(data_input):
-        if type(data_input[0]) == list:
-            return float(data_input[0][0])
-        else:
-            return float(data_input[0][price_key])
-
     resp = requests.get(full_url)
     resp_data = resp.json()
     asks = resp_data.get('asks')
     bids = resp_data.get('bids')
-    min_ask = get_min_ask_or_max_bid(asks)
-    max_bid = get_min_ask_or_max_bid(bids)
-    sum_asks = sum_bid_or_asks(asks)
-    sum_bids = sum_bid_or_asks(bids)
+    min_ask = get_min_ask_or_max_bid(asks, price_key)
+    max_bid = get_min_ask_or_max_bid(bids, price_key)
+    sum_asks = sum_bid_or_asks(asks, size, price_key, amount_key)
+    sum_bids = sum_bid_or_asks(bids, size, price_key, amount_key)
 
     return {
         'min_ask': min_ask,
