@@ -10,5 +10,5 @@ python regalia_main.py
 python -m unittest
 
 ## Authors
-Henry Chu, Matthew Lee, Jay Mowli
+Henry Chu
 
