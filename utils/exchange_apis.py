@@ -2,7 +2,6 @@
 
 # Python imports
 import collections
-# TODO Figure out how these imports work to not have to use sys.path.append
 import json.decoder
 import sys
 sys.path.append("..")  # Adds higher directory to python modules path.
@@ -100,15 +99,12 @@ def get_asset_order_book_at_exchange(ticker, exchange_id, size=5):
     elif exchange_id == GEMINI_ID:
         return get_gemini_order_book(symbol, size=size)
     elif exchange_id == KRAKEN_ID:
-        # TODO
         return {'min_ask': None, 'min_bid': None, 'dollar_value_min_asks': None, 'dollar_value_max_bids': None}
     elif exchange_id == OKCOIN_ID:
         return get_okcoin_order_book(symbol, size=size)
 
 
-# -- Gemini Notes --
-# https://api.gemini.com/v1/symbols/details/btcusd
-# https://api.gemini.com/v1/pubticker/:symbol
+# -- Gemini --
 
 
 def get_gemini_asset_price(symbol):
@@ -207,6 +203,9 @@ def get_gemini_usd_trading_pairs():
     return usd_assets
 
 
+# -- Okcoin --
+
+
 def get_okcoin_asset_price(symbol):
     """Identifies current asset price on Okcoin.
     :arg symbol: string for trading pair {BTC-USD|ETH-USD}
@@ -280,6 +279,9 @@ def get_okcoin_usd_trading_pairs():
     return usd_assets
 
 
+# -- Binance.US --
+
+
 def get_binance_us_asset_price(symbol):
     """Identifies current asset price on Binance.US.
     :arg symbol: string for trading pair {BTCUSD|ETHUSD}
@@ -343,6 +345,9 @@ def get_binance_us_usd_trading_pairs():
 
     _ = check_for_delisting(KNOWN_BINANCE_US_ASSETS, usd_assets, 'Binance.US')
     return usd_assets
+
+
+# -- Coinbase --
 
 
 def get_coinbase_asset_price(symbol):
@@ -411,17 +416,7 @@ def get_coinbase_usd_trading_pairs():
     return usd_assets
 
 
-# -- Crypto.com Notes --
-# https://exchange-docs.crypto.com/spot/index.html#introduction
-# https://api.crypto.com/v2/public/get-instruments
-# https://api.crypto.com/v2/public/get-ticker?instrument_name=BTC_USDT
-
-
-# -- Kucoin Notes --
-# https://docs.kucoin.com/#general
-# https://api.kucoin.com/api/v2/symbols
-# https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=BTC-USDT
-# https://api.kucoin.com/api/v1/market/allTickers
+# -- Kraken --
 
 
 def get_kraken_asset_price(symbol):
