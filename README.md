@@ -40,7 +40,7 @@ python regalia_main.py
 ### Run unit tests
 python -m unittest
 
-## Future Developement
+## Future Development
 - **Customizable Parameters**: Adjust parameters such as minimum price difference, trading fees, and 
 minimum volume to tailor the tool to your specific trading strategy.
 - **Configurable Notifications**: Receive alerts via email, SMS, or other channels when potential 
