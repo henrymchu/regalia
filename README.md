@@ -1,7 +1,16 @@
 # regalia
 
 ## Description
-A tool to search for potential arbitrage opportunities across exchanges
+Regalia is a powerful tool designed to identify potential price differences (arbitrage opportunities) 
+across various cryptocurrency exchanges. By leveraging real-time market data, this tool helps traders 
+and enthusiasts capitalize on price differentials between exchanges, maximizing profit potential in 
+the volatile cryptocurrency market.
+
+### Features
+- **Multi-Exchange Analysis**: Seamlessly compare prices across multiple cryptocurrency exchanges to 
+uncover lucrative arbitrage opportunities.
+- **Real-Time Data**: Utilize up-to-date market data to ensure accurate analysis and timely execution 
+of trades.
 
 ## Project Structure
 ```
