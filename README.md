@@ -6,6 +6,8 @@ across various cryptocurrency exchanges. By leveraging real-time market data, th
 and enthusiasts capitalize on price differentials between exchanges, maximizing profit potential in 
 the volatile cryptocurrency market.
 
+**Note:** This project was actively developed through 2024 and represents a complete, functional arbitrage detection system with comprehensive testing and documentation.
+
 ### Features
 - **Multi-Exchange Analysis**: Seamlessly compare prices across multiple cryptocurrency exchanges to 
 uncover lucrative arbitrage opportunities.
